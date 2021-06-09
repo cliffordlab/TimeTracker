@@ -1,0 +1,102 @@
+org/hdm/app/timetracker/listener/PreferenceListener.java
+ org.hdm.app.timetracker.listener.PreferenceListener
+org/hdm/app/timetracker/BuildConfig.java
+ org.hdm.app.timetracker.BuildConfig
+org/hdm/app/timetracker/dialogs/DialogFoodFragment.java
+ org.hdm.app.timetracker.dialogs.DialogFoodFragment
+org/hdm/app/timetracker/adapter/DialogFoodListAdapter.java
+ org.hdm.app.timetracker.adapter.DialogFoodListAdapter
+org/hdm/app/timetracker/util/FileLoader.java
+ org.hdm.app.timetracker.util.FileLoader
+org/hdm/app/timetracker/util/MyJsonParser.java
+ org.hdm.app.timetracker.util.MyJsonParser
+org/hdm/app/timetracker/screens/FragmentSettings.java
+ org.hdm.app.timetracker.screens.FragmentSettings
+org/hdm/app/timetracker/adapter/ActiveListAdapter.java
+ org.hdm.app.timetracker.adapter.ActiveListAdapter
+org/hdm/app/timetracker/datastorage/ActivityObject.java
+ org.hdm.app.timetracker.datastorage.ActivityObject
+org/hdm/app/timetracker/listener/ViewHolderListener.java
+ org.hdm.app.timetracker.listener.ViewHolderListener
+org/hdm/app/timetracker/screens/BaseFragemnt.java
+ org.hdm.app.timetracker.screens.BaseFragemnt
+org/hdm/app/timetracker/listener/ActivityListOnClickListener.java
+ org.hdm.app.timetracker.listener.ActivityListOnClickListener
+org/hdm/app/timetracker/listener/DialogPortionListOnClickListener.java
+ org.hdm.app.timetracker.listener.DialogPortionListOnClickListener
+org/hdm/app/timetracker/util/View_Holder.java
+ org.hdm.app.timetracker.util.View_Holder
+ org.hdm.app.timetracker.util.View_Holder$1
+ org.hdm.app.timetracker.util.View_Holder$1$1
+org/hdm/app/timetracker/listener/DialogFoodListOnClickListener.java
+ org.hdm.app.timetracker.listener.DialogFoodListOnClickListener
+org/hdm/app/timetracker/screens/FragmentCalender.java
+ org.hdm.app.timetracker.screens.FragmentCalender
+org/hdm/app/timetracker/util/Logs.java
+ org.hdm.app.timetracker.util.Logs
+org/hdm/app/timetracker/listener/MainListener.java
+ org.hdm.app.timetracker.listener.MainListener
+org/hdm/app/timetracker/models/SubjectModel.java
+ org.hdm.app.timetracker.models.SubjectModel
+org/hdm/app/timetracker/util/ActivityLogs.java
+ org.hdm.app.timetracker.util.ActivityLogs
+org/hdm/app/timetracker/datastorage/DataManager.java
+ org.hdm.app.timetracker.datastorage.DataManager
+org/hdm/app/timetracker/adapter/ObjectListAdapter.java
+ org.hdm.app.timetracker.adapter.ObjectListAdapter
+org/hdm/app/timetracker/views/MenuView.java
+ org.hdm.app.timetracker.views.MenuView
+ org.hdm.app.timetracker.views.MenuView$1
+ org.hdm.app.timetracker.views.MenuView$2
+org/hdm/app/timetracker/adapter/CalendarItemListAdapter.java
+ org.hdm.app.timetracker.adapter.CalendarItemListAdapter
+org/hdm/app/timetracker/listener/CalendarItemOnClickListener.java
+ org.hdm.app.timetracker.listener.CalendarItemOnClickListener
+org/hdm/app/timetracker/views/CustomerList.java
+ org.hdm.app.timetracker.views.CustomerList
+org/hdm/app/timetracker/MyApplication.java
+ org.hdm.app.timetracker.MyApplication
+org/hdm/app/timetracker/dialogs/DialogPortionFragment.java
+ org.hdm.app.timetracker.dialogs.DialogPortionFragment
+org/hdm/app/timetracker/datastorage/Stamp.java
+ org.hdm.app.timetracker.datastorage.Stamp
+org/hdm/app/timetracker/screens/Settings.java
+ org.hdm.app.timetracker.screens.Settings
+ org.hdm.app.timetracker.screens.Settings$1
+org/hdm/app/timetracker/listener/MenuListener.java
+ org.hdm.app.timetracker.listener.MenuListener
+org/hdm/app/timetracker/listener/ActiveActivityListOnClickListener.java
+ org.hdm.app.timetracker.listener.ActiveActivityListOnClickListener
+org/hdm/app/timetracker/util/TimeStamp.java
+ org.hdm.app.timetracker.util.TimeStamp
+org/hdm/app/timetracker/main/MainActivity.java
+ org.hdm.app.timetracker.main.MainActivity
+ org.hdm.app.timetracker.main.MainActivity$1
+ org.hdm.app.timetracker.main.MainActivity$2
+ org.hdm.app.timetracker.main.MainActivity$2$1
+ org.hdm.app.timetracker.main.MainActivity$3
+ org.hdm.app.timetracker.main.MainActivity$4
+ org.hdm.app.timetracker.main.MainActivity$5
+ org.hdm.app.timetracker.main.MainActivity$6
+ org.hdm.app.timetracker.main.MainActivity$7
+ org.hdm.app.timetracker.main.MainActivity$8
+ org.hdm.app.timetracker.main.MainActivity$9
+org/hdm/app/timetracker/adapter/DialogPortionListAdapter.java
+ org.hdm.app.timetracker.adapter.DialogPortionListAdapter
+org/hdm/app/timetracker/util/Variables.java
+ org.hdm.app.timetracker.util.Variables
+org/hdm/app/timetracker/adapter/CalendarListAdapter.java
+ org.hdm.app.timetracker.adapter.CalendarListAdapter
+org/hdm/app/timetracker/util/Consts.java
+ org.hdm.app.timetracker.util.Consts
+org/hdm/app/timetracker/datastorage/TimeFrame.java
+ org.hdm.app.timetracker.datastorage.TimeFrame
+org/hdm/app/timetracker/screens/FragmentActivity.java
+ org.hdm.app.timetracker.screens.FragmentActivity
+ org.hdm.app.timetracker.screens.FragmentActivity$1
+org/hdm/app/timetracker/datastorage/ActivityObjectMap.java
+ org.hdm.app.timetracker.datastorage.ActivityObjectMap
+org/hdm/app/timetracker/util/Settings.java
+ org.hdm.app.timetracker.util.Settings
+org/hdm/app/timetracker/screens/FragmentContainer.java
+ org.hdm.app.timetracker.screens.FragmentContainer

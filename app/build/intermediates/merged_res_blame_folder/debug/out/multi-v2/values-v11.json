@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+            "map": [
+                {
+                    "source": "/Users/cshaw24/.gradle/caches/transforms-2/files-2.1/eb4ff84536f9e2e5a3c4d038bdfc23a6/jetified-core-0.8.6.1/res/values-v11/values-v11.xml",
+                    "from": {
+                        "startLines": "2,19",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,1094",
+                        "endLines": "18,35",
+                        "endColumns": "12,12",
+                        "endOffsets": "1089,2110"
+                    }
+                }
+            ]
+        }
+    ]
+}

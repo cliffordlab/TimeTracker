@@ -1,0 +1,547 @@
+{
+  "portions": [
+    {
+      "_id": "301",
+      "title": "1/4",
+      "imageName": "ic_portion_01.png",
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
+    },
+    {
+      "_id": "302",
+      "title": "2/4",
+      "imageName": "ic_portion_02.png",
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
+    },
+    {
+      "_id": "303",
+      "title": "Plate 3/4",
+      "imageName": "ic_portion_03.png",
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
+    },
+    {
+      "_id": "304",
+      "title": "Plate 4/4",
+      "imageName": "ic_portion_04.png",
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
+    }
+  ],
+
+  "food": [
+    {
+      "_id": "201",
+      "title": "Cereals",
+      "imageName": "ic_food_01.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "202",
+      "title": "Roots/tubers",
+      "imageName": "ic_food_02.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "203",
+      "title": "Vegetables",
+      "imageName": "ic_food_03.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "204",
+      "title": "Fruits",
+      "imageName": "ic_food_04.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "205",
+      "title": "Meats",
+      "imageName": "ic_food_05.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "206",
+      "title": "Eggs",
+      "imageName": "ic_food_06.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "207",
+      "title": "Fish/seafood",
+      "imageName": "ic_food_07.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "208",
+      "title": "Pulses/legumes/nuts",
+      "imageName": "ic_food_08.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "209",
+      "title": "Milk products",
+      "imageName": "ic_food_09.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "210",
+      "title": "Oils/fats",
+      "imageName": "ic_food_10.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "211",
+      "title": "Sugar/honey",
+      "imageName": "ic_food_11.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    },
+    {
+      "_id": "212",
+      "title": "Tea/coffee",
+      "imageName": "ic_food_12.png",
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
+    }
+  ],
+
+  "activitys": [
+    {
+      "_id": 0,
+      "title": "Fertilization (Manual)",
+      "imageName": "ic_18.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": "Manual"
+    },
+    {
+      "_id": 1,
+      "title": "Weeding (Manual)",
+      "imageName": "ic_21.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": "Manual"
+    },
+    {
+      "_id": 2,
+      "title": "Irrigation (Manual Pumping)",
+      "imageName": "ic_27.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": "Manual"
+    },
+    {
+      "_id": 3,
+      "title": "Bagging (Manual)",
+      "imageName": "ic_33.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": "Manual"
+    },
+    {
+      "_id": 4,
+      "title": "Marketing (Selling)",
+      "imageName": "ic_40.png",
+      "externalWork": "",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+    {
+      "_id": 5,
+      "title": "Animal Husbandry",
+      "imageName": "ic_41.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+    {
+      "_id": 6,
+      "title": "Hunting",
+      "imageName": "ic_42.png",
+      "externalWork": "",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+    {
+      "_id": 7,
+      "title": "Fishing",
+      "imageName": "Fishing.jpg",
+      "externalWork": "",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+    {
+      "_id": 8,
+      "title": "Maintaining + repairing",
+      "imageName": "ic_47.png",
+      "externalWork": "",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+
+    {
+      "_id": 9,
+      "title": "Vegatable Garden",
+      "imageName": "ic_49.png",
+      "externalWork": "Yes",
+      "group_activity": "On-Farm-Work",
+      "item": ""
+    },
+    {
+      "_id": 10,
+      "title": "Walking (Unloaded)",
+      "imageName": "ic_51.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 11,
+      "title": "Motorbike (Unloaded)",
+      "imageName": "ic_53.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 12,
+      "title": "Bicylcle (Unloaded)",
+      "imageName": "ic_55.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 13,
+      "title": "Animal Cart (Loaded)",
+      "imageName": "ic_56.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 14,
+      "title": "Car / Van (Loaded)",
+      "imageName": "ic_58.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 15,
+      "title": "Car / Van (Unloaded)",
+        "imageName": "ic_59.png",
+      "externalWork": "",
+      "group_activity": "Travelling-Transporting",
+      "item": ""
+    },
+    {
+      "_id": 16,
+      "title": "Studying",
+      "imageName": "Studying.jpg",
+      "externalWork": "",
+      "group_activity": "Learning-Education",
+      "item": ""
+    },
+    {
+      "_id": 17,
+      "title": "Care of children",
+      "imageName": "ic_65.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 18,
+      "title": "Care of sick",
+      "imageName": "ic_66.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 19,
+      "title": "Elder care",
+      "imageName": "Elder_care.jpg",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 20,
+      "title": "Fuel Collection",
+      "imageName": "Fuel_collection.jpg",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 21,
+      "title": "Fogon",
+      "imageName": "Fogon.jpg",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 22,
+      "title": "Cleaning",
+      "imageName": "ic_71.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 23,
+      "title": "Washing pots",
+      "imageName": "ic_72.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 24,
+      "title": "Washing clothes",
+      "imageName": "ic_73.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 25,
+      "title": "Construction (Household)",
+      "imageName": "Construction.jpg",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 26,
+      "title": "Buying groceries",
+      "imageName": "ic_75.png",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 27,
+      "title": "Sleeping",
+      "imageName": "ic_76.png",
+      "externalWork": "",
+      "group_activity": "Personal Care",
+      "item": ""
+    },
+    {
+      "_id": 28,
+      "title": "Resting",
+      "imageName": "ic_77.png",
+      "externalWork": "",
+      "group_activity": "Personal Care",
+      "item": ""
+    },
+    {
+      "_id": 29,
+      "title": "Being Sick",
+      "imageName": "ic_78.png",
+      "externalWork": "",
+      "group_activity": "Personal Care",
+      "item": ""
+    },
+    {
+      "_id": 30,
+      "title": "Eating + Drinking",
+      "imageName": "ic_79.png",
+      "externalWork": "",
+      "group_activity": "Personal Care",
+      "item": ""
+    },
+    {
+      "_id": 31,
+      "title": "Personal Hygiene",
+      "imageName": "ic_80.png",
+      "externalWork": "",
+      "group_activity": "Personal Care",
+      "item": ""
+    },
+    {
+      "_id": 32,
+      "title": "Media",
+      "imageName": "ic_81.png",
+      "externalWork": "",
+      "group_activity": "Social + Cultural Activities",
+      "item": ""
+    },
+    {
+      "_id": 33,
+      "title": "Religion",
+      "imageName": "ic_82.png",
+      "externalWork": "",
+      "group_activity": "Social + Cultural Activities",
+      "item": ""
+    },
+    {
+      "_id": 34,
+      "title": "Chatting",
+      "imageName": "ic_83.png",
+      "externalWork": "",
+      "group_activity": "Social + Cultural Activities",
+      "item": ""
+    },
+    {
+      "_id": 35,
+      "title": "Sports",
+      "imageName": "ic_84.png",
+      "externalWork": "",
+      "group_activity": "Social + Cultural Activities",
+      "item": ""
+    },
+    {
+      "_id": 36,
+      "title": "Dancing + Making music",
+      "imageName": "ic_85.png",
+      "externalWork": "",
+      "group_activity": "Social + Cultural Activities",
+      "item": ""
+    },
+    {
+      "_id": 37,
+      "title": "Meeting",
+      "imageName": "Meeting.jpg",
+      "externalWork": "",
+      "group_activity": "Community",
+      "item": ""
+    },
+    {
+      "_id": 38,
+      "title": "Cooking (Community)",
+      "imageName": "Group_cooking.jpg",
+      "externalWork": "",
+      "group_activity": "Community",
+      "item": ""
+    },
+    {
+      "_id": 39,
+      "title": "Construction (Community)",
+      "imageName": "ic_88.png",
+      "externalWork": "",
+      "group_activity": "Community",
+      "item": ""
+    },
+    {
+      "_id": 40,
+      "title": "OffFarm Work",
+      "imageName": "Paid_work.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 41,
+      "title": "Breastfeeding",
+      "imageName": "PBreastfeeding.jpg",
+      "externalWork": "",
+      "group_activity": "Household",
+      "item": ""
+    },
+    {
+      "_id": 42,
+      "title": "Buying LPG",
+      "imageName": "Buying_LPG.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 43,
+      "title": "Cooking LPG",
+      "imageName": "Cooking_LPG.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 44,
+      "title": "OffFarm Work",
+      "imageName": "Paid_work.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 45,
+      "title": "Doctor",
+      "imageName": "Doctor.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 46,
+      "title": "Burning trash",
+      "imageName": "Burning_trash.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 47,
+      "title": "Childcare",
+      "imageName": "Childcare.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 48,
+      "title": "Knitting",
+      "imageName": "Knitting.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 49,
+      "title": "Milking",
+      "imageName": "Milking.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": 50,
+      "title": "Herding",
+      "imageName": "Herding.jpg",
+      "externalWork": "",
+      "group_activity": "Off- Farm Work",
+      "item": ""
+    }
+  ]
+}

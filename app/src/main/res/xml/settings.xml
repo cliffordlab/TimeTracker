@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <PreferenceCategory
+        android:key="pref_key_user"
+        android:title="User">
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="@string/pref_key_user_user_id"
+            android:summary="Set participant ID which is using the Smartphone"
+            android:title="User ID: " />
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="@string/pref_key_user_dropoff_date"
+            android:summary="Set participant drop off date which of the Smartphone"
+            android:title="Dropoff Date: " />
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="@string/pref_key_user_consent"
+            android:defaultValue="true"
+            android:summary="Set whether participant provided informed consent"
+            android:title="Consented ?: " />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_key_connection"
+        android:title="Connection">
+        <Preference
+            android:key="@string/pref_key_connection_send"
+            android:summary="Send Logfile to Email"
+            android:title="Sending" />
+        <EditTextPreference
+            android:key="@string/pref_key_email_id"
+            android:summary="send logfile via email"
+            android:inputType="textEmailAddress"
+            android:title="Email: " />
+        <!--<EditTextPreference
+            android:key="@string/pref_key_connection_port"
+            android:summary="Set Port from Server"
+            android:inputType="number"
+            android:title="IP: " />-->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Preferneces"
+        android:key="pref_key_activity">
+
+        <SwitchPreference
+            android:key="@string/pref_key_preferences_editable_mode"
+            android:summary="Enable Activity Editable Function in CalendarView"
+            android:title="Editable Mode"
+           />
+        <!--<Preference
+            android:key="@string/pref_key_preferences_reset_activities"
+            android:summary="Reset all - Images, LogFiles, Configuration"
+            android:title="Reset all" />-->
+
+
+        <EditTextPreference
+            android:key="@string/pref_key_max_active_activity"
+            android:summary="Amount of maximal parallel recoding activities"
+            android:inputType="number"
+            android:title="Max. active Activities: " />
+
+        <EditTextPreference
+            android:key="@string/pref_key_threshold_minute"
+            android:inputType="number"
+            android:summary="Minimum time which an activity must be recoded to be displayed in CalendarList"
+            android:title="Threshold Minutes: " />
+
+        <EditTextPreference
+            android:key="@string/pref_key_logtime_interval"
+            android:inputType="number"
+            android:summary="this is the interval time which the application will save a logfile recorded activities "
+            android:title="Log Time Interval: " />
+
+        <Preference
+            android:key="@string/pref_key_reload"
+            android:summary="Reload Images and Configurations from external Folder - resets the current Activities Logs"
+            android:title="Reload" />
+
+        <Preference
+            android:key="@string/pref_key_restore"
+            android:summary="Restore all Images and Configurations from internal - resets the current Activities Logs"
+            android:title="Restore" />
+
+        <Preference
+            android:key="@string/pref_key_app_version"
+            android:summary="Current Version"
+            android:title="App Version" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
