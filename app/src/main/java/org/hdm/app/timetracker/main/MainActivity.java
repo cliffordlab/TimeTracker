@@ -30,6 +30,7 @@ import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
 import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.listener.PreferenceListener;
+import org.hdm.app.timetracker.util.Consts;
 import org.hdm.app.timetracker.util.FileLoader;
 import org.hdm.app.timetracker.util.Variables;
 import org.json.JSONException;
@@ -663,7 +664,8 @@ public class MainActivity extends AppCompatActivity implements
         if (Variables.getInstance().emailId.equals("")) {
             Toast.makeText(this, "Please enter your Email address", Toast.LENGTH_SHORT).show();
         } else {
-            AndroidNetworking.post("http://64.225.117.112:8082/apis/corey")
+            Log.e(TAG, "API URL: "+ Consts.SEND_MAIL_URL);
+            AndroidNetworking.post(Consts.SEND_MAIL_URL)
                     .addBodyParameter("email", Variables.getInstance().emailId)
                     .addBodyParameter("user_id", Variables.getInstance().user_ID)
                     .addBodyParameter("user_date", Variables.getInstance().user_Dropoff_Date)
