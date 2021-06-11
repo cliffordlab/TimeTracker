@@ -42,6 +42,9 @@ public final class Consts {
     public final static String ACTIVE_LIST = "ActiveList";
     public final static String CALENDAR_MAP = "CalendarMap";
 
+    //API URL
+    public final static String BASE_URL = "http://13.57.155.198:8082/apis/";
+    public final static String SEND_MAIL_URL =  BASE_URL + "corey";
 
     /**
      * The caller references the constants using <tt>Consts.EMPTY_STRING</tt>,
