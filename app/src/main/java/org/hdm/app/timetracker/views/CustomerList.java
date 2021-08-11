@@ -33,5 +33,6 @@ public class CustomerList extends ArrayAdapter<String> {
         imageView = (ImageView) rowView.findViewById(R.id.iv_calendar_content);
         imageView.setImageResource(imageId[position]);
         return rowView;
+
     }
 }
