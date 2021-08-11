@@ -33,7 +33,7 @@
         <Preference
             android:key="@string/pref_key_connection_send"
             android:summary="Send Logfile to Email"
-            android:title="Sending" />
+            android:title="Send Data" />
         <EditTextPreference
             android:key="@string/pref_key_email_id"
             android:summary="send logfile via email"

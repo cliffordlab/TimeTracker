@@ -16,20 +16,20 @@
         "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/layout/fragment_activitys.xml"
     },
     {
-        "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/animator_card_flip_left_out.xml.flat",
         "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/animator/card_flip_left_out.xml"
     },
     {
-        "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/layout_dialog_food.xml.flat",
-        "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/layout/dialog_food.xml"
+        "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/drawable_compact_camera_48.png.flat",
         "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/drawable/compact_camera_48.png"
+    },
+    {
+        "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/layout_dialog_food.xml.flat",
+        "source": "/Users/cshaw24/Downloads/TimeTracker-main/app/src/main/res/layout/dialog_food.xml"
     },
     {
         "merged": "/Users/cshaw24/Downloads/TimeTracker-main/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_calendar.png.flat",

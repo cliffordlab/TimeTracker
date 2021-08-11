@@ -8,12 +8,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
-import android.text.style.IconMarginSpan;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.$Gson$Preconditions;
 
 import org.hdm.app.timetracker.datastorage.ActivityObject;
 import org.hdm.app.timetracker.datastorage.DataManager;
@@ -28,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -51,59 +47,70 @@ import static org.hdm.app.timetracker.util.Consts.PROPERTIESFILE;
 public class FileLoader {
 
     private static final String TAG = "FileLoader";
-    private final File enviroment = Environment.getExternalStorageDirectory();
     private final Context context;
     String state = Environment.getExternalStorageState();
+    private File enviroment = Environment.getExternalStorageDirectory();
     private Properties properties;
-
 
     /**************************
      * Constructor
      *************************/
     public FileLoader(MainActivity mainActivity) {
         context = mainActivity;
+        Log.e(TAG, "File Loader init");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            //enviroment = new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)));
+            enviroment = new File(context.getFilesDir().getAbsolutePath());
+        } else {
+            enviroment = new File(String.valueOf(Environment.getExternalStorageDirectory()));
+        }
     }
-
 
     /**************************
      * Init File Prozess
      *************************/
 
     public void initFiles() {
-
-
         initFolder();
         initConfiguration();
         initJson();
-
     }
-
 
     public void initFolder() {
 
-        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+ MAIN_FOLDER);
-        if (!folder.exists()){
+        File folder = new File(enviroment + File.separator + MAIN_FOLDER);
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)+"/" + MAIN_FOLDER);
+        }else {
+            folder = new File(Environment.getExternalStorageDirectory() + "/"+MAIN_FOLDER);
+        }*/
+        //File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+ MAIN_FOLDER);
+        if (!folder.exists()) {
             folder.mkdirs();
+            Log.e(TAG, "MAIN Folder Create");
         }
 
-        if (folder.exists()){
-            File imageFolder = new File(Environment.getExternalStorageDirectory() + File.separator + IMAGE_FOLDER);
-            imageFolder.mkdir();
+        if (folder.exists()) {
+            File imageFolder = new File(enviroment + File.separator + IMAGE_FOLDER);
+            if (!imageFolder.exists())
+                imageFolder.mkdirs();
 
-            File confiFolder = new File(Environment.getExternalStorageDirectory() + File.separator + CONFIG_FOLDER);
-            confiFolder.mkdir();
+            File confiFolder = new File(enviroment + File.separator + CONFIG_FOLDER);
+            if (!confiFolder.exists())
+                confiFolder.mkdirs();
 
-            File logFolder = new File(Environment.getExternalStorageDirectory() + File.separator + LOGS_FOLDER);
-            logFolder.mkdir();
-        }else {
+            File logFolder = new File(enviroment + File.separator + LOGS_FOLDER);
+            if (!logFolder.exists())
+                logFolder.mkdirs();
+        } else {
             Log.d(TAG, MAIN_FOLDER + "Folder not Create");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 folder = new File(context.getFilesDir(), MAIN_FOLDER);
                 folder.mkdir();
-                if (!folder.exists()){
+                if (!folder.exists()) {
                     Log.d(TAG, "Folder Created");
-                }else {
-                  Log.d(TAG, "Folder not Created");
+                } else {
+                    Log.d(TAG, "Folder not Created");
                 }
             }
         }
@@ -168,8 +175,6 @@ public class FileLoader {
                 e.printStackTrace();
             }
         }
-
-
     }
 
 
@@ -185,8 +190,6 @@ public class FileLoader {
         loadActivityObjects(ACTIVITIES, path, fileName);
         loadActivityObjects(PORTIONS, path, fileName);
         loadActivityObjects(FOOD, path, fileName);
-
-
     }
 
 
@@ -218,7 +221,6 @@ public class FileLoader {
         return sb.toString();
     }
 
-
     private String readStringFromExternalFolder(String folderPath, String fileName) {
 
         if (!isExternalFileExists(folderPath + fileName)) return null;
@@ -245,9 +247,7 @@ public class FileLoader {
             return null;
         }
         return sb.toString();
-
     }
-
 
     public boolean copyFileFromAssetToExternal(String fileName, String path) {
         Log.e("File Name : ", fileName);
@@ -289,7 +289,6 @@ public class FileLoader {
         }
         return true;
     }
-
 
     public boolean CopyImagesFromResourceToExternal(int[] resources) {
 
@@ -352,9 +351,9 @@ public class FileLoader {
         }
 
         File f = new File(enviroment, folderName);
-        if (f.exists()){
-            if (f.isDirectory()){
-                for (File file: f.listFiles()) {
+        if (f.exists()) {
+            if (f.isDirectory()) {
+                for (File file : f.listFiles()) {
                     file.delete();
                 }
             }
