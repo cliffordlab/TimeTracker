@@ -10,8 +10,6 @@ import android.net.NetworkInfo;
 public final class Consts {
 
     public final static boolean DEBUGMODE = true;
-
-
     public final static int CALENDARITEMROW = 1;
 
     public final static String JSONFILE = "standard.json";
