@@ -4,8 +4,8 @@
 - [2. Contributors](#2-contributors)
 
 # 1. Getting Started
-![flow charts](https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png)
-(https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/backend_flow.png)
+![app_flow chart](https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png)
+![backend_flow chart](https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png)
 
 
 System Requirements
