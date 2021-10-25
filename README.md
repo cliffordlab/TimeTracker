@@ -6,8 +6,8 @@
 # 1. Getting Started
 
 ## Flow Chart
-<img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png" width=300 align=left>
-<img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/backend_flow.png" width=300 align=left>
+<img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png" width=300>
+<img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/backend_flow.png" width=300>
 
 
 ## System Requirements
