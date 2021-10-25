@@ -7,7 +7,7 @@
 <img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/app_flow.png" width=300 align=left>
 <img src="https://github.com/cliffordlab/TimeTracker/blob/d83f64109708d1aaf222eec5231b10a7e81f5fe8/app/src/main/assets/backend_flow.png" width=300 align=left>
 
-System Requirements
+- System Requirements
 
 1. Android Studio - Android Studio Arctic Fox (2020.3.1)
 https://developer.android.com/studio
