@@ -50,5 +50,18 @@
     <string name="pref_key_connection_ip">pref_key_ip</string>
     <string name="pref_key_connection_port">pref_key_connection_port</string>
 
+    <!--  Countries  -->
+    <string name="pref_key_country">pref_key_country</string>
 
+    <string name="pref_country_label_india">India</string>
+    <string name="pref_country_label_rwanda">Rwanda</string>
+    <string name="pref_country_label_guatemala">Guatemala</string>
+    <string name="pref_country_label_peru">Peru</string>
+    <string name="pref_country_label_test">Test</string>
+
+    <string name="pref_country_india_value">India</string>
+    <string name="pref_country_rwanda_value">Rwanda</string>
+    <string name="pref_country_guatemala_value">Guatemala</string>
+    <string name="pref_country_peru_value">Peru</string>
+    <string name="pref_country_peru_test">Test</string>
 </resources>

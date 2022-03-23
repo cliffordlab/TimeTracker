@@ -5,8 +5,14 @@ package org.hdm.app.timetracker.screens;
  */
 
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,9 +20,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
+import org.hdm.app.timetracker.datastorage.ActivityObjectMap;
 import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.datastorage.Stamp;
 import org.hdm.app.timetracker.dialogs.DialogPortionFragment;
@@ -24,16 +32,32 @@ import org.hdm.app.timetracker.listener.ActiveActivityListOnClickListener;
 import org.hdm.app.timetracker.listener.ActivityListOnClickListener;
 import org.hdm.app.timetracker.adapter.ObjectListAdapter;
 import org.hdm.app.timetracker.adapter.ActiveListAdapter;
+import org.hdm.app.timetracker.util.FileLoader;
+import org.hdm.app.timetracker.util.MyJsonParser;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.hdm.app.timetracker.util.Consts.*;
+
+import android.view.View.OnClickListener;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 
 /**
@@ -44,7 +68,6 @@ public class FragmentActivity extends BaseFragemnt implements
         ActiveActivityListOnClickListener {
 
     private final String TAG = "FragmentActivity";
-
 
     private View view;
     private RecyclerView recyclerView;
@@ -64,6 +87,8 @@ public class FragmentActivity extends BaseFragemnt implements
     private int shortClickCounter = Variables.getInstance().shortClickCounter;
     private String currentShortClickTitle = "";
 
+    private String countrySetting;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,9 +96,61 @@ public class FragmentActivity extends BaseFragemnt implements
         initMenu(view);
         initActiveList();
         initObjectList();
+        Button button = (Button) view.findViewById(R.id.test_button);
+        button.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Log.i(TAG, "onClick: " + "Click Test button");
+                Log.i(TAG, "Variable selected country: " + Variables.getInstance().country);
+
+//                MyJsonParser jParser = new MyJsonParser();
+//                FileLoader fileLoader = new FileLoader();
+//
+//                // Picture object for device
+//                Map<String, ActivityObject> map = dataManager.getInstance().getObjectMap();
+//                for (ActivityObject obj : map.values()) {
+//                    Log.i("FragmentActivity", " Selected country*: " + ":\t" + obj._id);
+//                }
+//
+//                // Read custom country json file
+//                Log.i(TAG, "Read countries.json file to device");
+//                File environment = Environment.getExternalStorageDirectory();
+//                String folderPath = environment + "/" + CONFIG_FOLDER;
+//                String countryCustomFile = "countries.json";
+//                String jsonString = fileLoader.readStringFromExternalFolder(folderPath, countryCustomFile);
+//
+//                Pattern countryDataRegex = Pattern.compile("(\"([^\"]*)\").(\\[([^\"]*)\\])");
+//                Matcher m = countryDataRegex.matcher(jsonString.replaceAll("\\s+",""));
+//                String selectedCountryValue = "";
+//                while (m.find()) {
+//                    if(m.group(2).equals("peru")) {
+//                        Log.i(TAG, "Regex group 2: " + m.group(2));
+//                        Log.i(TAG, "Regex group 4: " + m.group(4));
+//                        selectedCountryValue = m.group(4);
+//                        break;
+//                    }
+//                }
+//
+//                // Convert string to array
+//                Log.i(TAG, "selectedCountryValue: " + selectedCountryValue);
+//                String[] cPictureNumberList = selectedCountryValue.split(",");
+//                Log.i(TAG, "str size: " + cPictureNumberList.length);
+//                for (String pictureNumber : cPictureNumberList) {
+//                    Log.i(TAG, "pictureNumber: " + pictureNumber);
+//                }
+//
+//                // Check matched countries and activity
+//                Map<String, ActivityObject> map1 = dataManager.getInstance().getObjectMap();
+//                for (ActivityObject obj : map1.values()) {
+//                    String activityId = obj._id;
+//                    boolean contains = Arrays.stream(cPictureNumberList).anyMatch(activityId::equals);
+//                    Log.i(TAG, "Check " + activityId + " match: " + contains);
+//                }
+            }
+        });
         return view;
     }
-
 
     @Override
     public void onResume() {
@@ -93,14 +170,10 @@ public class FragmentActivity extends BaseFragemnt implements
         addActiveActivitiesToCalenderList();
     }
 
-
     /*******************
      * Life Cycle Ende
      ***********************/
-
-
     private void initActiveList() {
-
         activeAdapter = new ActiveListAdapter(dataManager.activeList);
         activeAdapter.setListener(this);
         recyclerView_activeData = (RecyclerView) view.findViewById(R.id.rv_active);
@@ -113,8 +186,12 @@ public class FragmentActivity extends BaseFragemnt implements
 
 
     private void initObjectList() {
-
-        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(dataManager.getObjectMap().keySet()));
+//        Test
+        Log.i(TAG, "initObjectList for rv_list");
+//        Get picture object list
+//        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(dataManager.getObjectMap().keySet()));
+        this.countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(getCustomPictureList(this.countrySetting).keySet()));
         objectAdapter.setListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         recyclerView.setAdapter(objectAdapter);
@@ -123,12 +200,9 @@ public class FragmentActivity extends BaseFragemnt implements
                 var.listRows, StaggeredGridLayoutManager.VERTICAL));
     }
 
-
     /*******************
      * Init Ende
      ***********************/
-
-
     // Listener from the ActiveActivityObjectList
     @Override
     public void didOnClickOnActiveListItem(String title, View_Holder holder) {
@@ -140,7 +214,6 @@ public class FragmentActivity extends BaseFragemnt implements
     public void didOnLongClickOnActiveListItem(String title, View_Holder holder) {
         handleLongClick(title, null);
     }
-
 
     /**
      * Listener from the ActivityObjectList
@@ -156,7 +229,6 @@ public class FragmentActivity extends BaseFragemnt implements
     public void didLongClickOnActivityListItem(String title, View_Holder view_holder) {
         handleLongClick(title, view_holder);
     }
-
 
     private void handleShortClick(String title, View_Holder holder) {
 
@@ -181,7 +253,6 @@ public class FragmentActivity extends BaseFragemnt implements
 
             Log.d(TAG, "title4 " + object.externalWork);
 
-
             if (object.externalWork != null) {
 
                 if (object.externalWork.equals("Yes") && !object.activeState) {
@@ -195,9 +266,7 @@ public class FragmentActivity extends BaseFragemnt implements
                 } else if (object.externalWork.equals("Yes") && object.activeState) {
                     handleLongClick(title, holder);
                 }
-
             }
-
         }
 
         Handler handler = new Handler();
@@ -208,14 +277,9 @@ public class FragmentActivity extends BaseFragemnt implements
                 currentShortClickTitle = "";
             }
         }, var.shortClickCounterResetTime);
-
-
     }
 
-
     private void handleLongClick(String title, View_Holder holder) {
-
-
         Log.d(TAG, " titllte " + title + " " + holder);
 
         // If edditable Mode true - than add activity to selectedTime in CalendearList
@@ -468,7 +532,9 @@ public class FragmentActivity extends BaseFragemnt implements
 
     // load edited List and update ActivityObjectListAdapter
     public void updateObjectList() {
-        objectAdapter.list = new ArrayList<>(dataManager.getObjectMap().keySet());
+//        objectAdapter.list = new ArrayList<>(dataManager.getObjectMap().keySet());
+        this.countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(getCustomPictureList(this.countrySetting).keySet()));
         objectAdapter.notifyDataSetChanged();
     }
 
@@ -494,5 +560,48 @@ public class FragmentActivity extends BaseFragemnt implements
                 addActivityObjectToCalendarList(aObject.title, aObject.startTime);
             }
         }
+    }
+
+    private LinkedHashMap<String, ActivityObject> getCustomPictureList(String countrySetting) {
+        Log.i(TAG, "getCustomPictureList methods");
+        MyJsonParser jParser = new MyJsonParser();
+        FileLoader fileLoader = new FileLoader();
+        String countryCustomFile = "countries.json";
+        String folder = CONFIG_FOLDER;
+        LinkedHashMap<String, ActivityObject> pictureKeySet = new LinkedHashMap<>();
+
+        // Read custom country json file
+        Log.i(TAG, "Read countries.json file to device");
+        String folderPath = Environment.getExternalStorageDirectory() + "/" + folder;
+        String jsonString = fileLoader.readStringFromExternalFolder(folderPath, countryCustomFile);
+
+        Pattern countryDataRegex = Pattern.compile("(\"([^\"]*)\").(\\[([^\"]*)\\])");
+        Matcher m = countryDataRegex.matcher(jsonString.replaceAll("\\s+",""));
+        String selectedCountryValue = "";
+        while (m.find()) {
+            // Check with the selected country in setting
+            if(m.group(2).equals(countrySetting)) {
+                selectedCountryValue = m.group(4);
+                break;
+            }
+        }
+
+        // Convert string to array
+        String[] cPictureNumberList = selectedCountryValue.split(",");
+        Log.i(TAG, "str size: " + cPictureNumberList.length);
+
+        // Check matched countries and activity
+        Map<String, ActivityObject> map1 = dataManager.getInstance().getObjectMap();
+        for (ActivityObject aObj : map1.values()) {
+            String activityId = aObj._id;
+            boolean contains = Arrays.stream(cPictureNumberList).anyMatch(activityId::equals);
+//            Log.i(TAG, "Check " + activityId + " match: " + contains);
+            // Add keyset to array list if contains
+            if(contains) {
+                Log.i(TAG, "Put id: " + activityId);
+                pictureKeySet.put(aObj.title, aObj);
+            }
+        }
+        return pictureKeySet;
     }
 }

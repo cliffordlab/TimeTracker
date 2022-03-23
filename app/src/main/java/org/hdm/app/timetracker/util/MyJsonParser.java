@@ -22,27 +22,23 @@ public class MyJsonParser {
 
 
     public ArrayList<ActivityObject> createObjectFromJson(String objects, String jsonString) {
-
         if(jsonString != null && objects != null) {
+            ObjectMapper objectMapper = new ObjectMapper();
 
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            // Json String Input
-//            JsonParser jp = jsonFactory.createJsonParser(jsonString);
-            Log.d(TAG,"string  " + jsonString.toString());
-            ActivityObjectMap activityObjectMap = objectMapper.readValue(jsonString, ActivityObjectMap.class);
-            ArrayList arrayList = activityObjectMap.get(objects);
-            ActivityObject a =(ActivityObject) arrayList.get(1);
-            Log.d(TAG,"object " + a.title + " done");
-            return arrayList;
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            try {
+                // Json String Input
+    //            JsonParser jp = jsonFactory.createJsonParser(jsonString);
+                Log.d(TAG,"string  " + jsonString.toString());
+                ActivityObjectMap activityObjectMap = objectMapper.readValue(jsonString, ActivityObjectMap.class);
+                ArrayList arrayList = activityObjectMap.get(objects);
+                ActivityObject a =(ActivityObject) arrayList.get(1);
+                Log.d(TAG,"object " + a.title + " done");
+                return arrayList;
+            } catch (JsonParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

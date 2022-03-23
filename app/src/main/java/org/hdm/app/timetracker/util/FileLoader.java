@@ -44,42 +44,36 @@ public class FileLoader {
     private Context context;
     private Properties properties;
 
+    private String fileName = "activity.json";
+    private String countryCustomFile = "countries.json";
 
     /**************************
      * Constructor
      *************************/
+    public FileLoader() {}
     public FileLoader(MainActivity mainActivity) {
         context = mainActivity;
     }
-
 
     /**************************
      * Init File Prozess
      *************************/
 
     public void initFiles() {
-
-
         initFolder();
         initConfiguration();
         initJson();
-
     }
 
-
     public void initFolder() {
-
         createExternalFolder(MAIN_FOLDER);
         createExternalFolder(IMAGE_FOLDER);
         createExternalFolder(CONFIG_FOLDER);
         createExternalFolder(LOGS_FOLDER);
     }
 
-
     public void initConfiguration() {
-
         String path = enviroment + "/" + CONFIG_FOLDER;
-
 
         if (!isExternalFileExists(path + PROPERTIESFILE)) {
             copyFileFromAssetToExternal(PROPERTIESFILE, path);
@@ -122,7 +116,6 @@ public class FileLoader {
         }
 
         if (properties.get("listRows") != null) {
-
             try {
                 int value = Integer.parseInt((String) properties.get("listRows"));
                 Variables.getInstance().listRows = value;
@@ -130,27 +123,23 @@ public class FileLoader {
                 e.printStackTrace();
             }
         }
-
-
     }
 
-
     private void initJson() {
-
         String path = enviroment + "/" + CONFIG_FOLDER;
 
         // Copy all Json files from Intern to External Folder if they not exist
-        String fileName = "activity.json";
-        if (!isExternalFileExists(path + fileName)) {
-            copyFileFromAssetToExternal(fileName, path);
+        if (!isExternalFileExists(path + this.fileName)) {
+            copyFileFromAssetToExternal(this.fileName, path);
         }
-        loadActivityObjects(ACTIVITIES, path, fileName);
-        loadActivityObjects(PORTIONS, path, fileName);
-        loadActivityObjects(FOOD, path, fileName);
-
-
+        if (!isExternalFileExists(path + this.countryCustomFile)) {
+            copyFileFromAssetToExternal(this.countryCustomFile, path);
+            Log.i(TAG, "Copied " + this.countryCustomFile + " file to device");
+        }
+        loadActivityObjects(ACTIVITIES, path, this.fileName);
+        loadActivityObjects(PORTIONS, path, this.fileName);
+        loadActivityObjects(FOOD, path, this.fileName);
     }
-
 
     /**************************
      * Assets
@@ -180,18 +169,14 @@ public class FileLoader {
         return sb.toString();
     }
 
-
-    private String readStringFromExternalFolder(String folderPath, String fileName) {
-
+    public String readStringFromExternalFolder(String folderPath, String fileName) {
         if (!isExternalFileExists(folderPath + fileName)) return null;
-
         BufferedReader reader;
         StringBuilder sb;
         String mLine;
         File file = new File(folderPath, fileName);
 
         try {
-
             FileInputStream fileInputStream = new FileInputStream(file);
             reader = new BufferedReader(
                     new InputStreamReader(fileInputStream));
@@ -207,12 +192,9 @@ public class FileLoader {
             return null;
         }
         return sb.toString();
-
     }
 
-
     public boolean copyFileFromAssetToExternal(String fileName, String path) {
-
         if (fileName != null && path != null) {
             InputStream in = null;
             OutputStream out = null;
@@ -247,7 +229,6 @@ public class FileLoader {
         return true;
     }
 
-
     public boolean CopyImagesFromResourceToExternal(int[] resources) {
 
         if (resources.length != 0) {
@@ -272,13 +253,11 @@ public class FileLoader {
         return false;
     }
 
-
     public Drawable getDrawableFromPath(String filePath) {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         //Here you can make logic for decode bitmap for ignore oom error.
         return new BitmapDrawable(bitmap);
     }
-
 
     /**************************
      * Create External Folder
@@ -315,14 +294,10 @@ public class FileLoader {
 
     }
 
-
     /**************************
      * Property File
      *************************/
-
-
     public Properties getPropertiesFromAssets(String file) {
-
         properties = new Properties();
 
         try {
@@ -335,7 +310,6 @@ public class FileLoader {
         }
         return properties;
     }
-
 
     public Properties getPropertiesFromExternal(String file) {
 
@@ -359,7 +333,6 @@ public class FileLoader {
 
     // Load Content
     public void loadActivityObjects(String object, String folderPath, String fileName) {
-
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
         options.inSampleSize = 2; //reduce quality
@@ -372,10 +345,8 @@ public class FileLoader {
             copyFileFromAssetToExternal(fileName, folderPath);
         }
 
-
         if (DEBUGMODE) Log.d(TAG, "loadActivityObjects " + folderPath + fileName);
-
-
+        
         // Read out JsonFile from External Folder
         String jsonString = readStringFromExternalFolder(folderPath, fileName);
         if (DEBUGMODE) Log.d(TAG, "jasonString " + jsonString);
@@ -383,17 +354,15 @@ public class FileLoader {
         MyJsonParser jParser = new MyJsonParser();
         ArrayList<ActivityObject> list = jParser.createObjectFromJson(object, jsonString);
 
-
         if (list == null) {
             jsonString = readFromAssets(context, "activity.json");
             list = jParser.createObjectFromJson(object, jsonString);
         }
 
-
         String imgPath = enviroment.toString() + "/" + IMAGE_FOLDER;
 
         if (list != null) {
-
+            Log.i(TAG, "actitiy.json List size: " + list.size());
             for (int i = 0; i < list.size(); i++) {
                 ActivityObject activityObject = list.get(i);
 
@@ -437,17 +406,9 @@ public class FileLoader {
         }
     }
 
-
-
-
-
-
-
     /**************************
      * File Permission Check
      *************************/
-
-
     public boolean isExternalStorageWritable() {
         return (Environment.MEDIA_MOUNTED.equals(state));
     }
@@ -459,7 +420,6 @@ public class FileLoader {
         return false;
     }
 
-
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
@@ -468,11 +428,7 @@ public class FileLoader {
         }
     }
 
-
-
-
     public void saveLogsOnExternal(String fileName) {
-
 //        MyJsonParser parser = new MyJsonParser();
 //        String logFile = parser.createLogJsonFromActivityObjects();
 
@@ -484,19 +440,13 @@ public class FileLoader {
         Log.d(TAG, "logFile " + s);
     }
 
-
-
-
-
     private void writeStringOnExternal(String stringFile, String fileName, String path) {
-
         if (stringFile != null && fileName != null && path != null) {
 
             File f = new File(path);
             if (!f.exists()) {
                 initFolder();
             }
-
 
             File file = new File(path, fileName);
             FileOutputStream stream = null;

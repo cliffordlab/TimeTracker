@@ -3,6 +3,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/test_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:onClick="testClickBtn"/>
 
     <org.hdm.app.timetracker.views.MenuView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,10 +18,6 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/myrect"
         android:elevation="10dp"/>
-    />
-
-
-
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,18 +31,13 @@
         />
 
     <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rv_list"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rv_active"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:layout_weight="1"
         android:scrollbarSize="10dp"
-        />
-
-
-
-
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical" >
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
