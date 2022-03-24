@@ -59,11 +59,6 @@ public class Variables {
     public long logTimeInterval = 15;
 
 
-
-
-
-
-
     /**********
      * Activity Screen Variables
      ************/

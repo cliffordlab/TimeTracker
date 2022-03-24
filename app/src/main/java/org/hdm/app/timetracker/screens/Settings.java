@@ -104,7 +104,7 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
         }
 
         if (prefUserDropoffDate != null) {
-            prefUserDropoffDate.setTitle("User Dropff Date: " + Variables.getInstance().user_Dropoff_Date);
+            prefUserDropoffDate.setTitle("User Drop Off Date: " + Variables.getInstance().user_Dropoff_Date);
         }
 
 //        if (prefUserConsent != null) {
@@ -141,8 +141,6 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-
-
         if (preference.equals(prefActivitiesReset)){
             if (listener != null) listener.resetActivities();
         }
@@ -150,7 +148,6 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
         if (preference.equals(prefConnectionSend)) {
             if (listener != null) listener.sendLogFile();
         }
-
 
         return true;
     }

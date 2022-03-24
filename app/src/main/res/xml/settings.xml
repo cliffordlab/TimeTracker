@@ -30,8 +30,7 @@
             android:entryValues="@array/pref_country_options_values"
             android:key="@string/pref_key_country"
             android:summary="Select Country"
-            android:title="Country"
-            android:defaultValue="pref_country_india_value"/>
+            android:title="Country"/>
     </PreferenceCategory>
 
     <PreferenceCategory

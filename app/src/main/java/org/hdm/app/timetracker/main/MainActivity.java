@@ -55,23 +55,19 @@ public class MainActivity extends Activity implements
     Handler handler = new Handler();
     private Variables var;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initConfiguration();
-
         initCalendar();
         initDataLogger();
 //        initResetRecordedData();
         loadSavedObjectState();
         initLayout();
-
     }
 
     private void initCalendar() {
-
         DataManager.getInstance().calenderMap = new TreeMap<>();
 
 
@@ -97,7 +93,6 @@ public class MainActivity extends Activity implements
      */
     @Override
     public void onBackPressed() {
-
         // ToDo write test cases
         if (Variables.getInstance().backPress) {
 
@@ -119,7 +114,6 @@ public class MainActivity extends Activity implements
         }
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
@@ -128,7 +122,6 @@ public class MainActivity extends Activity implements
         saveCurrentState();
 //        startActivity(new Intent(this, MainActivity.class));
     }
-
 
     /**
      * Use the App as Homescreen App
@@ -144,7 +137,6 @@ public class MainActivity extends Activity implements
         if (Intent.ACTION_MAIN.equals(intent.getAction())) {
         }
     }
-
 
     /*****************************
      * Init
@@ -168,7 +160,6 @@ public class MainActivity extends Activity implements
         FileLoader fl = new FileLoader(this);
         fl.initFiles();
 
-
         // Datenabgleich zwischen SharedMemory und Variables
         SharedPreferences.Editor prefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
         prefs.putBoolean(getString(R.string.pref_key_preferences_editable_mode), var.editableMode);
@@ -180,7 +171,6 @@ public class MainActivity extends Activity implements
         prefs.commit();
 
     }
-
 
 //    /**
 //     * Init Content for CalendarList
@@ -241,7 +231,6 @@ public class MainActivity extends Activity implements
         calEndTime.setTime(currentTime);
         Log.d(TAG, "calendar end time " + calEndTime.getTime());
 
-
         Date time = cal.getTime();
         // Reset Time to 00:00:00
         time.setHours(var.startHour);
@@ -250,7 +239,6 @@ public class MainActivity extends Activity implements
 
         // Set Calendar with reseted time
         cal.setTime(time);
-
 
         Date endTime = calEndTime.getTime();
         endTime.setHours(var.endHour);
@@ -262,7 +250,6 @@ public class MainActivity extends Activity implements
 
         Log.d(TAG, "calendar end time " + endTime + "  " + time);
 
-
         while (time.before(endTime)) {
             time = cal.getTime();
             DataManager.getInstance().setCalenderMapEntry(time.toString(), null);
@@ -270,17 +257,13 @@ public class MainActivity extends Activity implements
             cal.add(Calendar.MINUTE, var.timeFrame);
             Log.d(TAG, "calendar time new " + time.toString() + " " + DataManager.getInstance().calenderMap.size());
         }
-
-
     }
-
 
     /**
      * Save current State every 15 min
      * Run in TimerTask Thread not on UI Thread
      */
     private void initDataLogger() {
-
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -295,10 +278,7 @@ public class MainActivity extends Activity implements
         timer.scheduleAtFixedRate(timerTask, 0, (var.logTimeInterval * 60 * 1000));
     }
 
-
     private void initResetRecordedData() {
-
-
         // ToDo Check hole function --- last edit
 
         // Set the alarm to start at approximately 2:00 p.m.
@@ -312,14 +292,12 @@ public class MainActivity extends Activity implements
         Date currentDate = calendar.getTime();
         Log.d(TAG, "calendar5 " + currentDate);
 
-
 //        Calendar currentCalendar = Calendar.getInstance();
 //        currentCalendar.add(Calendar.DAY_OF_MONTH, +1);
 //        initCalenderMap(currentCalendar.getTime()); // only for Testing
 
         Log.d(TAG, "calendar4 " + calendar.getTime());
         Log.d(TAG, "calendar5 " + currentDate);
-
 
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -329,7 +307,6 @@ public class MainActivity extends Activity implements
                 //add 24 hours to the calendar Time for the next
 //                calendar.add(Calendar.DAY_OF_MONTH, +1);
                 calendar.add(Calendar.SECOND, 10);
-
 
                 // Stop every active Activity and save the time
 
@@ -371,11 +348,9 @@ public class MainActivity extends Activity implements
                 // Reset all Lists, CalendarList, ObjectActivityList, ActiveActivity
                 initConfiguration();
 
-
                 // Add new CalendarItems
                 calendar.add(Calendar.DAY_OF_MONTH, +1);
                 initCalenderMap(calendar.getTime());
-
 
                 //Get active Activities and set them back to active
                 DataManager.getInstance().activeList = var.activeActivities;
@@ -410,15 +385,12 @@ public class MainActivity extends Activity implements
                     Log.d(TAG, "listt size " + DataManager.getInstance().getActivityObject(activityObject.title).startTime);
                 }
 
-
                 Log.d(TAG, "restart");
                 initResetRecordedData();
             }
         };
         timer.schedule(timerTask, calendar.getTime());
-
     }
-
 
     /**
      * Init the Layout
@@ -428,7 +400,6 @@ public class MainActivity extends Activity implements
         setFullScreen(true);
         setContentView(R.layout.activity_main);
     }
-
 
     /**
      * Set App to fullscreen mode if boolean == true
@@ -442,7 +413,6 @@ public class MainActivity extends Activity implements
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }
-
 
     /**
      * Save the current activities State on local storage as json format
@@ -458,37 +428,30 @@ public class MainActivity extends Activity implements
         new FileLoader(this).saveLogsOnExternal(fileName);
     }
 
-
     /**
      * Save current activity state, and CalenderMap in internal storage
      */
     private void saveCurrentState() {
-
         SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-
 
         // Save ObjectActivity Map
         Map<String, ActivityObject> map = DataManager.getInstance().getObjectMap();
         String json = gson.toJson(map);
         prefsEditor.putString(ACTIVITY_STATE, json);
 
-
         // Save ActiveList
         ArrayList<String> activeList = DataManager.getInstance().activeList;
         json = gson.toJson(activeList);
         prefsEditor.putString(ACTIVE_LIST, json);
-
 
         // Save CalendarMap
         TreeMap<String, ArrayList<String>> calendarMap = DataManager.getInstance().calenderMap;
         json = gson.toJson(calendarMap);
         prefsEditor.putString(CALENDAR_MAP, json);
         prefsEditor.commit();
-
     }
-
 
     /**
      * Load the stored current states after the app is opened
@@ -546,7 +509,6 @@ public class MainActivity extends Activity implements
         }
     }
 
-
     /**
      * Listener from SettingsView
      */
@@ -554,7 +516,6 @@ public class MainActivity extends Activity implements
     @Override
     public void resetActivities() {
         // Activity reset process;
-
         saveLogFile();
         resetAll();
         initConfiguration();
@@ -563,10 +524,8 @@ public class MainActivity extends Activity implements
         initCalendar();
     }
 
-
     @Override
     public void sendLogFile() {
-
         saveLogFile();
 
         Log.d(TAG, "Click on Send Files");
@@ -574,9 +533,7 @@ public class MainActivity extends Activity implements
         Thread sendThread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 Socket socket = null;
-
                 try {
                     socket = new Socket(var.serverIP, Integer.parseInt(var.serverPort));
 
@@ -586,7 +543,6 @@ public class MainActivity extends Activity implements
                     writer.close();
                     socket.close();
 
-
                 }  catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -595,21 +551,13 @@ public class MainActivity extends Activity implements
         sendThread.start();
     }
 
-
-
-
-
-
     private void resetAll() {
-
-
         SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         editor.remove(ACTIVITY_STATE);
         editor.remove(ACTIVE_LIST);
         editor.remove(CALENDAR_MAP);
         editor.commit();
-
 
         FileLoader fl = new FileLoader(this);
         fl.deleteExternalFolder(IMAGE_FOLDER);

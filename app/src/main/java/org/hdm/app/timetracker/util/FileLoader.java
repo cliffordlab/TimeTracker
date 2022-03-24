@@ -123,6 +123,10 @@ public class FileLoader {
                 e.printStackTrace();
             }
         }
+
+        if (properties.get("countryDefaultSetting") != null) {
+            Variables.getInstance().country = (String) properties.get("countryDefaultSetting");
+        }
     }
 
     private void initJson() {

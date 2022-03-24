@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -102,7 +103,8 @@ public class FragmentActivity extends BaseFragemnt implements
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Log.i(TAG, "onClick: " + "Click Test button");
-                Log.i(TAG, "Variable selected country: " + Variables.getInstance().country);
+
+//                Log.i(TAG, "Variable selected country: " + Variables.getInstance().country);
 
 //                MyJsonParser jParser = new MyJsonParser();
 //                FileLoader fileLoader = new FileLoader();
@@ -222,18 +224,18 @@ public class FragmentActivity extends BaseFragemnt implements
     @Override
     public void didClickOnActivityListItem(String title, View_Holder holder) {
         Log.d(TAG, "did click on View");
+        Log.i(TAG, "didClickOnActivityListItem()" + title);
         handleShortClick(title, holder);
     }
 
     @Override
     public void didLongClickOnActivityListItem(String title, View_Holder view_holder) {
+        Log.i(TAG, "didLongClickOnActivityListItem()" + title);
         handleLongClick(title, view_holder);
     }
 
     private void handleShortClick(String title, View_Holder holder) {
-
         Log.d(TAG, "title1 " + title + " " + currentShortClickTitle + " " + shortClickCounter);
-
 
         if (title.equals(currentShortClickTitle)) shortClickCounter--;
         currentShortClickTitle = title;
@@ -598,7 +600,6 @@ public class FragmentActivity extends BaseFragemnt implements
 //            Log.i(TAG, "Check " + activityId + " match: " + contains);
             // Add keyset to array list if contains
             if(contains) {
-                Log.i(TAG, "Put id: " + activityId);
                 pictureKeySet.put(aObj.title, aObj);
             }
         }
