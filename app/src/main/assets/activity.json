@@ -31,6 +31,22 @@
       "externalWork": null,
       "group_activity": "Food Quantity",
       "item": null
+    },
+    {
+      "_id": "india_plate",
+      "title": "change90",
+      "imageName": "India_Plate.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "full_plate",
+      "title": "change91",
+      "imageName": "Full_plate.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
     }
   ],
 
@@ -115,6 +131,70 @@
       "externalWork": null,
       "group_activity": "Food Quality",
       "item": null
+    },
+    {
+      "_id": "beans",
+      "title": "change90",
+      "imageName": "Beans.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "meat",
+      "title": "change91",
+      "imageName": "Meat.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "fats",
+      "title": "change92",
+      "imageName": "Fats.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "fruit",
+      "title": "change93",
+      "imageName": "Fruit.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "veg",
+      "title": "change94",
+      "imageName": "Veg.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "vegetables",
+      "title": "change95",
+      "imageName": "Vegetables.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "grains",
+      "title": "change96",
+      "imageName": "Grains.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "roots",
+      "title": "change97",
+      "imageName": "Roots.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
     }
   ],
 
@@ -832,6 +912,302 @@
       "imageName": "ic_89.png",
       "externalWork": "",
       "group_activity": "Off- Farm Work",
+      "item": ""
+    },
+    {
+      "_id": "fogon",
+      "title": "change90",
+      "imageName": "Fogon.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "meeting",
+      "title": "change91",
+      "imageName": "Meeting.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "beverage",
+      "title": "change92",
+      "imageName": "Beverage.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "rwandasleep",
+      "title": "change93",
+      "imageName": "RwandaSleep.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "rwandaelderly",
+      "title": "change94",
+      "imageName": "RwandaElderly.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "cooking_lpg",
+      "title": "change95",
+      "imageName": "Cooking_LPG.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "fire",
+      "title": "change96",
+      "imageName": "Fire.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "pila",
+      "title": "change97",
+      "imageName": "Pila.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "elder_care",
+      "title": "change98",
+      "imageName": "Elder_care.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "agrovet",
+      "title": "change99",
+      "imageName": "Agrovet.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "nixtamal",
+      "title": "change100",
+      "imageName": "Nixtamal.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "tortillas",
+      "title": "change101",
+      "imageName": "Tortillas.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "fuel_collection",
+      "title": "change102",
+      "imageName": "Fuel_collection.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "doctor",
+      "title": "change103",
+      "imageName": "Doctor.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "knitting",
+      "title": "change104",
+      "imageName": "Knitting.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "employment",
+      "title": "change105",
+      "imageName": "Employment.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "fishing",
+      "title": "change106",
+      "imageName": "Fishing.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "rwandaconstruction",
+      "title": "change107",
+      "imageName": "RwandaConstruction.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "buying_lpg",
+      "title": "change108",
+      "imageName": "Buying_LPG.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "childcare",
+      "title": "change109",
+      "imageName": "Childcare.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "breastfeeding",
+      "title": "change110",
+      "imageName": "Breastfeeding.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "rwandachildcare",
+      "title": "change111",
+      "imageName": "RwandaChildcare.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "water",
+      "title": "change112",
+      "imageName": "Water.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "group_cooking",
+      "title": "change113",
+      "imageName": "Group_cooking.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "rwandameeting",
+      "title": "change114",
+      "imageName": "RwandaMeeting.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "milking",
+      "title": "change115",
+      "imageName": "Milking.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "charcoal_making",
+      "title": "change116",
+      "imageName": "Charcoal_making.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "planting",
+      "title": "change117",
+      "imageName": "Planting.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "studying",
+      "title": "change118",
+      "imageName": "Studying.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "construction",
+      "title": "change119",
+      "imageName": "Construction.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "burning_trash",
+      "title": "change120",
+      "imageName": "Burning_trash.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "sleeping",
+      "title": "change121",
+      "imageName": "Sleeping.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "religion",
+      "title": "change122",
+      "imageName": "Religion.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "tinaja",
+      "title": "change123",
+      "imageName": "Tinaja.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "herding",
+      "title": "change124",
+      "imageName": "Herding.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "paid_work",
+      "title": "change125",
+      "imageName": "Paid_work.png",
+      "externalWork": "",
+      "group_activity": "",
+      "item": ""
+    },
+    {
+      "_id": "bathing",
+      "title": "change126",
+      "imageName": "Bathing.png",
+      "externalWork": "",
+      "group_activity": "",
       "item": ""
     }
   ]

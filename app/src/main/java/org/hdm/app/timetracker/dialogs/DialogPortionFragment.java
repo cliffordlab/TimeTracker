@@ -14,13 +14,16 @@ import android.widget.Button;
 
 import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.adapter.DialogPortionListAdapter;
+import org.hdm.app.timetracker.adapter.ObjectListAdapter;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
 import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.listener.DialogPortionListOnClickListener;
+import org.hdm.app.timetracker.util.FileHandler;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,8 +33,6 @@ import java.util.Map;
  * Created by Hannes on 03.06.2016.
  */
 public class DialogPortionFragment extends DialogFragment implements DialogPortionListOnClickListener, View.OnLongClickListener {
-
-
     private static final String TAG = "DialogPortionFragment";
     private ActivityObject activityObject;
     private DialogPortionListAdapter portionAdapter;
@@ -41,20 +42,19 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
     public Variables var = Variables.getInstance();
     public DataManager dataManager = DataManager.getInstance();
 
-
     View view;
     private Button btnDialogFood;
     private String lastSelectedItem = "";
 
+    private String portionsCustomFile = "portions.json";
+    private FileHandler fileHandler = new FileHandler();
 
     public DialogPortionFragment() {
     }
 
-
     public DialogPortionFragment(ActivityObject activityObject) {
         this.activityObject = activityObject;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,10 +62,8 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         view = inflater.inflate(R.layout.dialog_food, container,
                 false);
         initLayout();
-
         return view;
     }
-
 
     @Override
     public void onPause() {
@@ -74,12 +72,12 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         if (this != null) this.dismiss();
     }
 
-
     private void initLayout() {
-
         getDialog().setTitle("Choose a Portion");
 
-        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(dataManager.getPortionMap().keySet()));
+//        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(dataManager.getPortionMap().keySet()));
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.portionsCustomFile).keySet()));
         portionAdapter.setListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_listt);
         recyclerView.setAdapter(portionAdapter);
@@ -91,7 +89,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         btnDialogFood.setVisibility(View.GONE);
         btnDialogFood.setOnLongClickListener(this);
     }
-
 
     @Override
     public void didClickOnPortionListItem(String title, View_Holder holder) {
@@ -110,7 +107,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         // get clicked PortionObject
         ActivityObject portionObject = dataManager.getPortionObject(title);
         Log.d(TAG, "activState " + portionObject.activeState + " portion " + activityObject.portion);
-
 
         if (portionObject.activeState) {
             portionObject.activeState = false;
@@ -164,7 +160,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
             entry.getValue().activeState = false;
         }
     }
-
 
 //    @Override
 //    public Dialog onCreateDialog(Bundle savedInstanceState) {

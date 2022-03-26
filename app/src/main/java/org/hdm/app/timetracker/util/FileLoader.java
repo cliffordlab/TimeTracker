@@ -46,6 +46,8 @@ public class FileLoader {
 
     private String fileName = "activity.json";
     private String countryCustomFile = "countries.json";
+    private String portionsCustomFile = "portions.json";
+    private String foodCustomFile = "food.json";
 
     /**************************
      * Constructor
@@ -139,6 +141,14 @@ public class FileLoader {
         if (!isExternalFileExists(path + this.countryCustomFile)) {
             copyFileFromAssetToExternal(this.countryCustomFile, path);
             Log.i(TAG, "Copied " + this.countryCustomFile + " file to device");
+        }
+        if (!isExternalFileExists(path + this.portionsCustomFile)) {
+            copyFileFromAssetToExternal(this.portionsCustomFile, path);
+            Log.i(TAG, "Copied " + this.portionsCustomFile + " file to device");
+        }
+        if (!isExternalFileExists(path + this.foodCustomFile)) {
+            copyFileFromAssetToExternal(this.foodCustomFile, path);
+            Log.i(TAG, "Copied " + this.foodCustomFile + " file to device");
         }
         loadActivityObjects(ACTIVITIES, path, this.fileName);
         loadActivityObjects(PORTIONS, path, this.fileName);
@@ -389,14 +399,12 @@ public class FileLoader {
                     case ACTIVITIES:
                         DataManager.getInstance().setActivityObject(activityObject);
                         break;
-
                     case PORTIONS:
                         DataManager.getInstance().setPortionObject(activityObject);
                         break;
                     case FOOD:
                         DataManager.getInstance().setFoodObject(activityObject);
                         break;
-
                     default:
                         break;
                 }

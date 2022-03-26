@@ -33,6 +33,7 @@ import org.hdm.app.timetracker.listener.ActiveActivityListOnClickListener;
 import org.hdm.app.timetracker.listener.ActivityListOnClickListener;
 import org.hdm.app.timetracker.adapter.ObjectListAdapter;
 import org.hdm.app.timetracker.adapter.ActiveListAdapter;
+import org.hdm.app.timetracker.util.FileHandler;
 import org.hdm.app.timetracker.util.FileLoader;
 import org.hdm.app.timetracker.util.MyJsonParser;
 import org.hdm.app.timetracker.util.Variables;
@@ -88,7 +89,8 @@ public class FragmentActivity extends BaseFragemnt implements
     private int shortClickCounter = Variables.getInstance().shortClickCounter;
     private String currentShortClickTitle = "";
 
-    private String countrySetting;
+    private String countriesCustomFile = "countries.json";
+    private FileHandler fileHandler = new FileHandler();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,14 +108,16 @@ public class FragmentActivity extends BaseFragemnt implements
 
 //                Log.i(TAG, "Variable selected country: " + Variables.getInstance().country);
 
-//                MyJsonParser jParser = new MyJsonParser();
-//                FileLoader fileLoader = new FileLoader();
-//
-//                // Picture object for device
-//                Map<String, ActivityObject> map = dataManager.getInstance().getObjectMap();
-//                for (ActivityObject obj : map.values()) {
-//                    Log.i("FragmentActivity", " Selected country*: " + ":\t" + obj._id);
-//                }
+                MyJsonParser jParser = new MyJsonParser();
+                FileLoader fileLoader = new FileLoader();
+
+                // Picture object for device which the fileLoader.java read from the activity.json file
+                Map<String, ActivityObject> map = dataManager.getInstance().getObjectMap();
+                for (ActivityObject obj : map.values()) {
+                    Log.i("FragmentActivity", "Object ID from activityMap*: " + ":\t" + obj._id);
+                    Log.i("FragmentActivity", "Object title from activityMap*: " + ":\t" + obj.title);
+                    Log.i("FragmentActivity", "Object imageName from activityMap*: " + ":\t" + obj.imageName);
+                }
 //
 //                // Read custom country json file
 //                Log.i(TAG, "Read countries.json file to device");
@@ -192,8 +196,8 @@ public class FragmentActivity extends BaseFragemnt implements
         Log.i(TAG, "initObjectList for rv_list");
 //        Get picture object list
 //        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(dataManager.getObjectMap().keySet()));
-        this.countrySetting = Variables.getInstance().country.toLowerCase();
-        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(getCustomPictureList(this.countrySetting).keySet()));
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.countriesCustomFile).keySet()));
         objectAdapter.setListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         recyclerView.setAdapter(objectAdapter);
@@ -535,8 +539,8 @@ public class FragmentActivity extends BaseFragemnt implements
     // load edited List and update ActivityObjectListAdapter
     public void updateObjectList() {
 //        objectAdapter.list = new ArrayList<>(dataManager.getObjectMap().keySet());
-        this.countrySetting = Variables.getInstance().country.toLowerCase();
-        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(getCustomPictureList(this.countrySetting).keySet()));
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.countriesCustomFile).keySet()));
         objectAdapter.notifyDataSetChanged();
     }
 
@@ -562,47 +566,5 @@ public class FragmentActivity extends BaseFragemnt implements
                 addActivityObjectToCalendarList(aObject.title, aObject.startTime);
             }
         }
-    }
-
-    private LinkedHashMap<String, ActivityObject> getCustomPictureList(String countrySetting) {
-        Log.i(TAG, "getCustomPictureList methods");
-        MyJsonParser jParser = new MyJsonParser();
-        FileLoader fileLoader = new FileLoader();
-        String countryCustomFile = "countries.json";
-        String folder = CONFIG_FOLDER;
-        LinkedHashMap<String, ActivityObject> pictureKeySet = new LinkedHashMap<>();
-
-        // Read custom country json file
-        Log.i(TAG, "Read countries.json file to device");
-        String folderPath = Environment.getExternalStorageDirectory() + "/" + folder;
-        String jsonString = fileLoader.readStringFromExternalFolder(folderPath, countryCustomFile);
-
-        Pattern countryDataRegex = Pattern.compile("(\"([^\"]*)\").(\\[([^\"]*)\\])");
-        Matcher m = countryDataRegex.matcher(jsonString.replaceAll("\\s+",""));
-        String selectedCountryValue = "";
-        while (m.find()) {
-            // Check with the selected country in setting
-            if(m.group(2).equals(countrySetting)) {
-                selectedCountryValue = m.group(4);
-                break;
-            }
-        }
-
-        // Convert string to array
-        String[] cPictureNumberList = selectedCountryValue.split(",");
-        Log.i(TAG, "str size: " + cPictureNumberList.length);
-
-        // Check matched countries and activity
-        Map<String, ActivityObject> map1 = dataManager.getInstance().getObjectMap();
-        for (ActivityObject aObj : map1.values()) {
-            String activityId = aObj._id;
-            boolean contains = Arrays.stream(cPictureNumberList).anyMatch(activityId::equals);
-//            Log.i(TAG, "Check " + activityId + " match: " + contains);
-            // Add keyset to array list if contains
-            if(contains) {
-                pictureKeySet.put(aObj.title, aObj);
-            }
-        }
-        return pictureKeySet;
     }
 }
