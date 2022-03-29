@@ -3,12 +3,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        android:onClick="testClickBtn"/>
+<!--    <Button-->
+<!--        android:id="@+id/test_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Test"-->
+<!--        android:onClick="testClickBtn"/>-->
 
     <org.hdm.app.timetracker.views.MenuView
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -16,9 +16,11 @@ import org.hdm.app.timetracker.adapter.DialogFoodListAdapter;
 import org.hdm.app.timetracker.adapter.DialogPortionListAdapter;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
 import org.hdm.app.timetracker.datastorage.DataManager;
+import org.hdm.app.timetracker.datastorage.Stamp;
 import org.hdm.app.timetracker.datastorage.TimeFrame;
 import org.hdm.app.timetracker.listener.DialogPortionListOnClickListener;
 import org.hdm.app.timetracker.util.FileHandler;
+import org.hdm.app.timetracker.util.Logs;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
@@ -87,30 +89,27 @@ public class DialogFoodFragment extends DialogFragment implements DialogPortionL
 
     @Override
     public void didLongClickOnPortionListItem(String title, View_Holder view_holder) {
-        Log.d(TAG, "click on Dialog " + title);
-
+        Log.i(TAG, "click on Dialog " + title);
         handleObjectClick(title, view_holder);
     }
 
     private void handleObjectClick(String title, View_Holder view_holder) {
         // get clicked PortionObject
         ActivityObject foodObject = dataManager.getFoodObject(title);
-
         if(foodObject.activeState){
             foodObject.activeState = false;
-
             if(activityObject.food.contains(foodObject.title)){
                 activityObject.food.remove(foodObject.title);
+                activityObject.foodSelection.remove(foodObject.title);
             }
-
         } else {
             foodObject.activeState = true;
-
             if(!activityObject.food.contains(foodObject.title)){
                 activityObject.food.add(foodObject.title);
+                activityObject.foodSelection.add(foodObject.title);
             }
         }
-
+        Log.i(TAG, "DialogFoodFragment handleObjectClick: " + activityObject.food);
         // set Background to green
         view_holder.setBackground(foodObject.activeState);
 
@@ -133,14 +132,26 @@ public class DialogFoodFragment extends DialogFragment implements DialogPortionL
 
     @Override
     public boolean onLongClick(View v) {
-        Log.d(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").food.toString());
-        Log.d(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").portion);
-        Log.d(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").startTime.toString());
-        Log.d(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").endTime.toString());
+        Log.i(TAG, "**************** onLongClick: ");
+        Log.i(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").food.toString());
+        Log.i(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").portion);
+        Log.i(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").startTime.toString());
+        Log.i(TAG, "Here I´m " + dataManager.getActivityObject("Eating + Drinking").endTime.toString());
 
         // Save Timestamp and SubCategory in ActivityObject
-        activityObject.saveTimeStamp("user");
-        dataManager.setActivityObject(activityObject);
+        activityObject.setFoodTimeFrame("user");
+        boolean returnSetActivityObject = dataManager.setActivityObject(activityObject);
+//        Log.i(TAG, "returnSetActivityObject: " + returnSetActivityObject);
+//        Log.i(TAG, "portion and food: " + dataManager.getActivityObject("Eating + Drinking"));
+
+        // Save log file for portion and food
+//        Log.i(TAG, "timeFrameList array: " + activityObject.timeFrameList.toString());
+        Logs logs =  new Logs();;
+        logs.saveStateToLogList(dataManager, "Eating + Drinking");
+        logs.saveLogFile("eat_drink");
+        Log.i(TAG, "clear foodSelection: ");
+        activityObject.foodSelection.clear();
+
         resetFoodItemState();
         this.dismiss();
         return true;

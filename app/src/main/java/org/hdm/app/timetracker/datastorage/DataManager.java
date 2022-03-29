@@ -36,10 +36,11 @@ public class DataManager {
     public boolean createActivityObject(String name, ActivityObject activityObject) {
         if(name != null) {
             if(!activityMap.containsKey(name)) {
-
                 if(activityObject != null) {
+                    Log.i(TAG, "createActivityObject add: ");
                     activityMap.put(name, activityObject);
                 } else {
+                    Log.i(TAG, "createActivityObject add new: ");
                     activityMap.put(name, new ActivityObject(name));
                 }
                 return true;
@@ -49,11 +50,10 @@ public class DataManager {
     }
 
     public boolean setActivityObject(ActivityObject activityObject) {
-
         String title = activityObject.title;
         if (title != null && activityMap != null) {
-
             if(!activityMap.containsKey(title)) {
+                Log.i(TAG, "setActivityObject to createActivityObject: ");
                 createActivityObject(title, activityObject);
             }
             activityMap.put(title, activityObject);
@@ -61,7 +61,7 @@ public class DataManager {
                 Log.d(TAG, "key:" + activityObject.timeFrameList.get(activityObject.timeFrameList.size()-1).startTime);
             }
             return true;
-            }
+        }
         return false;
     }
 

@@ -98,39 +98,34 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
     @Override
     public void didLongClickOnPortionListItem(String title, View_Holder view_holder) {
         Log.d(TAG, "click on Dialog " + title);
-
         handleObjectClick(title, view_holder);
     }
 
     private void handleObjectClick(String title, View_Holder view_holder) {
-
         // get clicked PortionObject
         ActivityObject portionObject = dataManager.getPortionObject(title);
-        Log.d(TAG, "activState " + portionObject.activeState + " portion " + activityObject.portion);
+        Log.i(TAG, "activState " + portionObject.activeState + " portion " + activityObject.portion);
 
         if (portionObject.activeState) {
             portionObject.activeState = false;
         } else {
             portionObject.activeState = true;
-
             // save portion to activityObject
+            Log.i(TAG, "save portion to activityObject DialogPortionFragment.java: ");
             activityObject.portion = portionObject.title;
 
             if (!portionObject.title.equals(lastSelectedItem)) {
-
                 ActivityObject lastObject = dataManager.getPortionObject(lastSelectedItem);
-
                 if (lastObject != null) {
-
                     lastObject.activeState = false;
                     dataManager.setPortionObject(lastObject);
                     portionAdapter.notifyItemChanged(portionAdapter.list.indexOf(lastSelectedItem));
                 }
             }
-
+            Log.i(TAG, "DialogPortionFragment handleObjectClick lastSelectedItem: " + lastSelectedItem);
+            Log.i(TAG, "DialogPortionFragment handleObjectClick portionObject.title: " + portionObject.title);
             lastSelectedItem = portionObject.title;
         }
-
 
         // set Background to green
         view_holder.setBackground(portionObject.activeState);
@@ -144,7 +139,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
 
     @Override
     public boolean onLongClick(View v) {
-
         // pass onto next Dialog
         DialogFoodFragment dFoodFragment = new DialogFoodFragment(activityObject);
         FragmentManager fm = getFragmentManager();

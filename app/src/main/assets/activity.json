@@ -34,19 +34,19 @@
     },
     {
       "_id": "india_plate",
-      "title": "change90",
+      "title": "india_plate",
       "imageName": "India_Plate.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
     },
     {
       "_id": "full_plate",
-      "title": "change91",
+      "title": "full_plate",
       "imageName": "Full_plate.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quantity",
+      "item": null
     }
   ],
 
@@ -134,67 +134,67 @@
     },
     {
       "_id": "beans",
-      "title": "change90",
+      "title": "beans",
       "imageName": "Beans.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "meat",
-      "title": "change91",
+      "title": "meat",
       "imageName": "Meat.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "fats",
-      "title": "change92",
+      "title": "fats",
       "imageName": "Fats.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "fruit",
-      "title": "change93",
+      "title": "foodChange4",
       "imageName": "Fruit.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "veg",
-      "title": "change94",
+      "title": "veg",
       "imageName": "Veg.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "vegetables",
-      "title": "change95",
+      "title": "vegetables",
       "imageName": "Vegetables.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "grains",
-      "title": "change96",
+      "title": "grains",
       "imageName": "Grains.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     },
     {
       "_id": "roots",
-      "title": "change97",
+      "title": "roots",
       "imageName": "Roots.png",
-      "externalWork": "",
-      "group_activity": "",
-      "item": ""
+      "externalWork": null,
+      "group_activity": "Food Quality",
+      "item": null
     }
   ],
 

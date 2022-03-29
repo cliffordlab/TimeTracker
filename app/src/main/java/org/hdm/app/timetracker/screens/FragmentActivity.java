@@ -25,8 +25,6 @@ import android.widget.Button;
 
 import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
-import org.hdm.app.timetracker.datastorage.ActivityObjectMap;
-import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.datastorage.Stamp;
 import org.hdm.app.timetracker.dialogs.DialogPortionFragment;
 import org.hdm.app.timetracker.listener.ActiveActivityListOnClickListener;
@@ -39,28 +37,16 @@ import org.hdm.app.timetracker.util.MyJsonParser;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Timer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.hdm.app.timetracker.util.Consts.*;
 
 import android.view.View.OnClickListener;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
 
 /**
  * This fragment representing the front of the card.
@@ -99,62 +85,6 @@ public class FragmentActivity extends BaseFragemnt implements
         initMenu(view);
         initActiveList();
         initObjectList();
-        Button button = (Button) view.findViewById(R.id.test_button);
-        button.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Log.i(TAG, "onClick: " + "Click Test button");
-
-//                Log.i(TAG, "Variable selected country: " + Variables.getInstance().country);
-
-                MyJsonParser jParser = new MyJsonParser();
-                FileLoader fileLoader = new FileLoader();
-
-                // Picture object for device which the fileLoader.java read from the activity.json file
-                Map<String, ActivityObject> map = dataManager.getInstance().getObjectMap();
-                for (ActivityObject obj : map.values()) {
-                    Log.i("FragmentActivity", "Object ID from activityMap*: " + ":\t" + obj._id);
-                    Log.i("FragmentActivity", "Object title from activityMap*: " + ":\t" + obj.title);
-                    Log.i("FragmentActivity", "Object imageName from activityMap*: " + ":\t" + obj.imageName);
-                }
-//
-//                // Read custom country json file
-//                Log.i(TAG, "Read countries.json file to device");
-//                File environment = Environment.getExternalStorageDirectory();
-//                String folderPath = environment + "/" + CONFIG_FOLDER;
-//                String countryCustomFile = "countries.json";
-//                String jsonString = fileLoader.readStringFromExternalFolder(folderPath, countryCustomFile);
-//
-//                Pattern countryDataRegex = Pattern.compile("(\"([^\"]*)\").(\\[([^\"]*)\\])");
-//                Matcher m = countryDataRegex.matcher(jsonString.replaceAll("\\s+",""));
-//                String selectedCountryValue = "";
-//                while (m.find()) {
-//                    if(m.group(2).equals("peru")) {
-//                        Log.i(TAG, "Regex group 2: " + m.group(2));
-//                        Log.i(TAG, "Regex group 4: " + m.group(4));
-//                        selectedCountryValue = m.group(4);
-//                        break;
-//                    }
-//                }
-//
-//                // Convert string to array
-//                Log.i(TAG, "selectedCountryValue: " + selectedCountryValue);
-//                String[] cPictureNumberList = selectedCountryValue.split(",");
-//                Log.i(TAG, "str size: " + cPictureNumberList.length);
-//                for (String pictureNumber : cPictureNumberList) {
-//                    Log.i(TAG, "pictureNumber: " + pictureNumber);
-//                }
-//
-//                // Check matched countries and activity
-//                Map<String, ActivityObject> map1 = dataManager.getInstance().getObjectMap();
-//                for (ActivityObject obj : map1.values()) {
-//                    String activityId = obj._id;
-//                    boolean contains = Arrays.stream(cPictureNumberList).anyMatch(activityId::equals);
-//                    Log.i(TAG, "Check " + activityId + " match: " + contains);
-//                }
-            }
-        });
         return view;
     }
 
@@ -301,35 +231,26 @@ public class FragmentActivity extends BaseFragemnt implements
 
         // when Activity is not active
         if (!activityObject.activeState && var.activeCount < var.maxRecordedActivity) {
-
-
             // Set State to active
             activityObject.activeState = true;
 
             // set temporary start time
             activityObject.startTime = Calendar.getInstance().getTime();
             if (DEBUGMODE) Log.d(TAG, "activityObject " + activityObject.startTime);
-
-
             if (!externalWork) activityObject.service = "No";
-
 
             // Count how many activity are active
             var.activeCount++;
 
             // Add Activity to activeList
             dataManager.activeList.add(activityObject.title);
-
         } else if (activityObject.activeState) {
-
-
             // Deactivate Activity
             activityObject.activeState = false;
             activityObject.count = 0;
 
             // set temporary end time
             activityObject.endTime = Calendar.getInstance().getTime();
-
 
             //Count how many activities are active
             var.activeCount--;
@@ -338,31 +259,23 @@ public class FragmentActivity extends BaseFragemnt implements
             Date end = activityObject.endTime;
 
             Log.d(TAG, "startTimee " + activityObject.startTime);
-
-
 //                if ((end.getTime() - start.getTime())/10000f > var.minRecordingTime) {
 //                    // add ActivityObject to CalendarContentList
 //                }
-
             addActivityObjectToCalendarList(activityObject.title, activityObject.startTime);
 
             if (activityObject.title.equals("Eating + Drinking")) {
-
                 DialogPortionFragment dFragment = new DialogPortionFragment(activityObject);
                 FragmentManager fm = getFragmentManager();
                 dFragment.show(fm, "Dialog Fragment");
-
             } else {
                 // Save Timestamp and SubCategory in ActivityObject
-
+                Log.i(TAG, "Save Timestamp and SubCategory in ActivityObject: ");
                 saveStateToLogList(activityObject);
-
                 activityObject.saveTimeStamp("user");
             }
-
             dataManager.activeList.remove(activityObject.title);
         }
-
 
         // Store edited ActivityObject back in DataManager
 //        if(!activityObject.title.equals("01"))
@@ -378,9 +291,7 @@ public class FragmentActivity extends BaseFragemnt implements
 //            holder.handleTimeCounter(activityObject.activeState);
             externalWork = false;
         }
-
         updateActiveList();
-
         /**
          * If Activity selected from ActiveList (disable Activity)
          * than notify the corresponding ActivityObject in the ActivityList
@@ -388,11 +299,9 @@ public class FragmentActivity extends BaseFragemnt implements
         if (holder == null) {
             objectAdapter.notifyItemChanged(objectAdapter.list.indexOf(activityObject.title));
         }
-
     }
 
     private void saveStateToLogList(ActivityObject activityObject) {
-
         Stamp stamp = new Stamp();
         stamp.user = var.user_ID;
         stamp.activity = activityObject.title;
@@ -408,7 +317,6 @@ public class FragmentActivity extends BaseFragemnt implements
         dataManager.logList.add(stamp);
     }
 
-
     /**
      * This function handle the onClick of an Activity when the Activity
      * will add manually to specific time in CalendarList.
@@ -418,12 +326,10 @@ public class FragmentActivity extends BaseFragemnt implements
      * @param title Name from the selected Activity
      */
     private void handelEditableActivity(String title) {
-
         // Get the DataObject which was clicked
         // there are all information stored about the activity object
         // state, names image ect.
         ActivityObject activityObject = dataManager.getActivityObject(title);
-
 
         String startTime = var.selectedTime;
         int startHour = Integer.parseInt(startTime.substring(11, 13));
@@ -435,13 +341,11 @@ public class FragmentActivity extends BaseFragemnt implements
         startDate.setMinutes(startMin);
         startDate.setSeconds(00);
 
-
         // EndTime
         Calendar endT = Calendar.getInstance();
         endT.setTime(startDate);
         endT.add(Calendar.MINUTE, var.timeFrame);
         Date endDate = endT.getTime();
-
 
         // add ActivityObject to CalenderList
         boolean add = dataManager.setActivityToCalendarList(var.selectedTime, activityObject.title);
@@ -458,12 +362,10 @@ public class FragmentActivity extends BaseFragemnt implements
     }
 
     private void addActivityObjectToCalendarList(String title, Date startTime) {
-
         // find current TimeSlot
         int startMin = startTime.getMinutes();
         int firstMin = 0;
         if (startMin > var.timeFrame) firstMin = var.timeFrame;
-
 
         Calendar calFirstTimeSlot = Calendar.getInstance();
         calFirstTimeSlot.setTime(startTime);
@@ -472,27 +374,21 @@ public class FragmentActivity extends BaseFragemnt implements
         firstDate.setSeconds(0);
         firstDate.setMinutes(firstMin);
 
-
         Calendar cal = Calendar.getInstance();
         // cal.add(Calendar.HOUR, 2); // for Testing purpouse
         Date currentDate = cal.getTime();
 
-
         Log.d(TAG, "time1 " + startTime);
-
 
         long diff = currentDate.getTime() - startTime.getTime();
         long seconds = diff / 1000;
         long minutes = seconds / 60;
 
         if (minutes >= var.minRecordingTime) {
-
-
             // Store Activity in TimeSlot from CalendarList
             dataManager.setActivityToCalendarList(firstDate.toString(), title);
 
             if (DEBUGMODE) Log.d(TAG, "time2; " + startTime + " || startTime; " + firstDate);
-
 
             calFirstTimeSlot.setTime(firstDate);
             calFirstTimeSlot.add(Calendar.MINUTE, var.timeFrame);
@@ -513,15 +409,12 @@ public class FragmentActivity extends BaseFragemnt implements
                     Log.d(TAG, "time4; " + startTime + " || startTime; " + firstDate + " || currentTime; " + currentDate);
 
             }
-
         }
     }
-
 
     // In this mode the user only sees a list of activitys
     // when he selects one than screens flip back to calendar screen
     private void editableMode() {
-
         if (var.editable) {
             menuView.setVisibility(View.GONE);
             recyclerView_activeData.setVisibility(View.GONE);
@@ -556,7 +449,6 @@ public class FragmentActivity extends BaseFragemnt implements
      * add all active Activity to CalendarList
      */
     private void addActiveActivitiesToCalenderList() {
-
         ArrayList<String> activeList = dataManager.activeList;
 
         if (activeList != null && activeList.size() > 0) {

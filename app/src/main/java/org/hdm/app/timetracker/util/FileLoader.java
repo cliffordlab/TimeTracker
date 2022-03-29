@@ -126,6 +126,7 @@ public class FileLoader {
             }
         }
 
+        // Set default country
         if (properties.get("countryDefaultSetting") != null) {
             Variables.getInstance().country = (String) properties.get("countryDefaultSetting");
         }
@@ -158,8 +159,6 @@ public class FileLoader {
     /**************************
      * Assets
      *************************/
-
-
     public String readFromAssets(Context context, String filename) {
 
         BufferedReader reader = null;
@@ -446,10 +445,15 @@ public class FileLoader {
 
         String path = enviroment.toString() + "/" + LOGS_FOLDER;
         Gson gson = new Gson();
-        String s = gson.toJson(DataManager.getInstance().logList);
-        writeStringOnExternal(s, fileName, path);
-        DataManager.getInstance().lastLog = s;
-        Log.d(TAG, "logFile " + s);
+
+        if(!(DataManager.getInstance().logList.size() == 0)) {
+            String s = gson.toJson(DataManager.getInstance().logList);
+            writeStringOnExternal(s, fileName, path);
+            DataManager.getInstance().lastLog = s;
+            Log.i(TAG, "logFile " + s);
+        } else {
+            Log.i(TAG, "logList is empty");
+        }
     }
 
     private void writeStringOnExternal(String stringFile, String fileName, String path) {

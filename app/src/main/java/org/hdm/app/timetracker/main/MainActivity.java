@@ -315,7 +315,6 @@ public class MainActivity extends Activity implements
 
                 // iterate through the complete list and save the active Activity to Activity Object
                 for (int i = 0; i < list.size() - 1; i++) {
-
                     String title = list.get(i);
 
                     ActivityObject activityObject = DataManager.getInstance().getActivityObject(title);
