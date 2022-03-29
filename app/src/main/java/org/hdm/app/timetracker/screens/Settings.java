@@ -138,7 +138,6 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
     }
 
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference.equals(prefActivitiesReset)){
@@ -148,10 +147,8 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
         if (preference.equals(prefConnectionSend)) {
             if (listener != null) listener.sendLogFile();
         }
-
         return true;
     }
-
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -209,9 +206,13 @@ public class Settings extends PreferenceFragment implements Preference.OnPrefere
         return true;
     }
 
+    // Update country
     private void updateCountrySummaryText() {
+        String selectedCountry = Variables.getInstance().country;
         Preference countryPref = findPreference(PREF_Country);
-        countryPref.setSummary(Variables.getInstance().country);
-        Log.i("Settings", "Select Country " + Variables.getInstance().country);
+        countryPref.setSummary(selectedCountry);
+        ListPreference listPreference = (ListPreference) findPreference(PREF_Country);
+        listPreference.setValue(selectedCountry);
+        Log.i("Settings", "Select Country " + selectedCountry);
     }
 }
