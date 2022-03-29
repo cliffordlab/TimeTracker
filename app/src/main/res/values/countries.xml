@@ -6,8 +6,6 @@
         <item>@string/pref_country_label_rwanda</item>
         <item>@string/pref_country_label_guatemala</item>
         <item>@string/pref_country_label_peru</item>
-        <item>@string/pref_country_label_all</item>
-        <item>@string/pref_country_label_test</item>
     </string-array>
     <!-- Values -->
     <string-array name="pref_country_options_values">
@@ -15,7 +13,5 @@
         <item>@string/pref_country_rwanda_value</item>
         <item>@string/pref_country_guatemala_value</item>
         <item>@string/pref_country_peru_value</item>
-        <item>@string/pref_country_all_value</item>
-        <item>@string/pref_country_test_value</item>
     </string-array>
 </resources>
