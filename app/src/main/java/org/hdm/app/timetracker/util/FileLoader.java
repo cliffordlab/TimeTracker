@@ -276,7 +276,6 @@ public class FileLoader {
      * Create External Folder
      *************************/
     public String createExternalFolder(String folderName) {
-
         if (!isExternalStorageWritable()) {
             Toast.makeText(context, " External Storage is not writeble -" +
                     "folder could not be created", Toast.LENGTH_SHORT).show();
@@ -293,18 +292,16 @@ public class FileLoader {
     }
 
     public String deleteExternalFolder(String folderName) {
-
-        if (!isExternalStorageWritable()) {
-            Toast.makeText(context, " External Storage is not writeble -" +
-                    "folder could not be created", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
+        Log.i(TAG, "deleteExternalFolder: ");
         File f = new File(enviroment, folderName);
-
+        if (f.isDirectory()) {
+            String[] children = f.list();
+            for (int i = 0; i < children.length; i++) {
+                new File(f, children[i]).delete();
+            }
             f.mkdirs();
-            return f.toString();
-
+        }
+        return f.toString();
     }
 
     /**************************

@@ -51,12 +51,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Preferneces"
+        android:title="Preferences"
         android:key="pref_key_activity">
         <Preference
             android:key="@string/pref_key_preferences_reset_activities"
-            android:summary="Reset all - Images, LogFiles, Configuration"
-            android:title="Reset all" />
+            android:summary="Reset - LogFiles"
+            android:title="Reset Log" />
 
         <SwitchPreference
             android:key="@string/pref_key_preferences_editable_mode"

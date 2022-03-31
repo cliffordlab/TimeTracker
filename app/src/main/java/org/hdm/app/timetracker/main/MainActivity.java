@@ -559,8 +559,8 @@ public class MainActivity extends Activity implements
         editor.commit();
 
         FileLoader fl = new FileLoader(this);
-        fl.deleteExternalFolder(IMAGE_FOLDER);
-        fl.deleteExternalFolder(CONFIG_FOLDER);
+//        fl.deleteExternalFolder(IMAGE_FOLDER);
+//        fl.deleteExternalFolder(CONFIG_FOLDER);
         fl.deleteExternalFolder(LOGS_FOLDER);
     }
 }
