@@ -59,11 +59,6 @@ public class Variables {
     public long logTimeInterval = 15;
 
 
-
-
-
-
-
     /**********
      * Activity Screen Variables
      ************/
@@ -172,7 +167,6 @@ public class Variables {
     public int shortClickCounter = 3;
     public long shortClickCounterResetTime = 4000;
 
-
     /**
      * Status if Smartphone is connected to server
      */
@@ -188,6 +182,10 @@ public class Variables {
     public Date secondDay;
     public Date thirdDay;
 
+    /**
+     *  Variable for selected country
+     */
+    public String country = "";
 
     /***********
      * Singelton pattern

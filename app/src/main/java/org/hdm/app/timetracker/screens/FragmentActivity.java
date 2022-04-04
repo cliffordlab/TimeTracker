@@ -5,8 +5,15 @@ package org.hdm.app.timetracker.screens;
  */
 
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,16 +21,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
-import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.datastorage.Stamp;
 import org.hdm.app.timetracker.dialogs.DialogPortionFragment;
 import org.hdm.app.timetracker.listener.ActiveActivityListOnClickListener;
 import org.hdm.app.timetracker.listener.ActivityListOnClickListener;
 import org.hdm.app.timetracker.adapter.ObjectListAdapter;
 import org.hdm.app.timetracker.adapter.ActiveListAdapter;
+import org.hdm.app.timetracker.util.FileHandler;
+import org.hdm.app.timetracker.util.FileLoader;
+import org.hdm.app.timetracker.util.MyJsonParser;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
@@ -31,10 +41,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 
 import static org.hdm.app.timetracker.util.Consts.*;
 
+import android.view.View.OnClickListener;
 
 /**
  * This fragment representing the front of the card.
@@ -44,7 +56,6 @@ public class FragmentActivity extends BaseFragemnt implements
         ActiveActivityListOnClickListener {
 
     private final String TAG = "FragmentActivity";
-
 
     private View view;
     private RecyclerView recyclerView;
@@ -64,6 +75,9 @@ public class FragmentActivity extends BaseFragemnt implements
     private int shortClickCounter = Variables.getInstance().shortClickCounter;
     private String currentShortClickTitle = "";
 
+    private String countriesCustomFile = "countries.json";
+    private FileHandler fileHandler = new FileHandler();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +87,6 @@ public class FragmentActivity extends BaseFragemnt implements
         initObjectList();
         return view;
     }
-
 
     @Override
     public void onResume() {
@@ -93,14 +106,10 @@ public class FragmentActivity extends BaseFragemnt implements
         addActiveActivitiesToCalenderList();
     }
 
-
     /*******************
      * Life Cycle Ende
      ***********************/
-
-
     private void initActiveList() {
-
         activeAdapter = new ActiveListAdapter(dataManager.activeList);
         activeAdapter.setListener(this);
         recyclerView_activeData = (RecyclerView) view.findViewById(R.id.rv_active);
@@ -113,8 +122,12 @@ public class FragmentActivity extends BaseFragemnt implements
 
 
     private void initObjectList() {
-
-        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(dataManager.getObjectMap().keySet()));
+//        Test
+        Log.i(TAG, "initObjectList for rv_list");
+//        Get picture object list
+//        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(dataManager.getObjectMap().keySet()));
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.countriesCustomFile).keySet()));
         objectAdapter.setListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         recyclerView.setAdapter(objectAdapter);
@@ -123,12 +136,9 @@ public class FragmentActivity extends BaseFragemnt implements
                 var.listRows, StaggeredGridLayoutManager.VERTICAL));
     }
 
-
     /*******************
      * Init Ende
      ***********************/
-
-
     // Listener from the ActiveActivityObjectList
     @Override
     public void didOnClickOnActiveListItem(String title, View_Holder holder) {
@@ -141,7 +151,6 @@ public class FragmentActivity extends BaseFragemnt implements
         handleLongClick(title, null);
     }
 
-
     /**
      * Listener from the ActivityObjectList
      * Handled the click on an Activity
@@ -149,19 +158,18 @@ public class FragmentActivity extends BaseFragemnt implements
     @Override
     public void didClickOnActivityListItem(String title, View_Holder holder) {
         Log.d(TAG, "did click on View");
+        Log.i(TAG, "didClickOnActivityListItem()" + title);
         handleShortClick(title, holder);
     }
 
     @Override
     public void didLongClickOnActivityListItem(String title, View_Holder view_holder) {
+        Log.i(TAG, "didLongClickOnActivityListItem()" + title);
         handleLongClick(title, view_holder);
     }
 
-
     private void handleShortClick(String title, View_Holder holder) {
-
         Log.d(TAG, "title1 " + title + " " + currentShortClickTitle + " " + shortClickCounter);
-
 
         if (title.equals(currentShortClickTitle)) shortClickCounter--;
         currentShortClickTitle = title;
@@ -181,7 +189,6 @@ public class FragmentActivity extends BaseFragemnt implements
 
             Log.d(TAG, "title4 " + object.externalWork);
 
-
             if (object.externalWork != null) {
 
                 if (object.externalWork.equals("Yes") && !object.activeState) {
@@ -195,9 +202,7 @@ public class FragmentActivity extends BaseFragemnt implements
                 } else if (object.externalWork.equals("Yes") && object.activeState) {
                     handleLongClick(title, holder);
                 }
-
             }
-
         }
 
         Handler handler = new Handler();
@@ -208,14 +213,9 @@ public class FragmentActivity extends BaseFragemnt implements
                 currentShortClickTitle = "";
             }
         }, var.shortClickCounterResetTime);
-
-
     }
 
-
     private void handleLongClick(String title, View_Holder holder) {
-
-
         Log.d(TAG, " titllte " + title + " " + holder);
 
         // If edditable Mode true - than add activity to selectedTime in CalendearList
@@ -231,35 +231,26 @@ public class FragmentActivity extends BaseFragemnt implements
 
         // when Activity is not active
         if (!activityObject.activeState && var.activeCount < var.maxRecordedActivity) {
-
-
             // Set State to active
             activityObject.activeState = true;
 
             // set temporary start time
             activityObject.startTime = Calendar.getInstance().getTime();
             if (DEBUGMODE) Log.d(TAG, "activityObject " + activityObject.startTime);
-
-
             if (!externalWork) activityObject.service = "No";
-
 
             // Count how many activity are active
             var.activeCount++;
 
             // Add Activity to activeList
             dataManager.activeList.add(activityObject.title);
-
         } else if (activityObject.activeState) {
-
-
             // Deactivate Activity
             activityObject.activeState = false;
             activityObject.count = 0;
 
             // set temporary end time
             activityObject.endTime = Calendar.getInstance().getTime();
-
 
             //Count how many activities are active
             var.activeCount--;
@@ -268,31 +259,23 @@ public class FragmentActivity extends BaseFragemnt implements
             Date end = activityObject.endTime;
 
             Log.d(TAG, "startTimee " + activityObject.startTime);
-
-
 //                if ((end.getTime() - start.getTime())/10000f > var.minRecordingTime) {
 //                    // add ActivityObject to CalendarContentList
 //                }
-
             addActivityObjectToCalendarList(activityObject.title, activityObject.startTime);
 
             if (activityObject.title.equals("Eating + Drinking")) {
-
                 DialogPortionFragment dFragment = new DialogPortionFragment(activityObject);
                 FragmentManager fm = getFragmentManager();
                 dFragment.show(fm, "Dialog Fragment");
-
             } else {
                 // Save Timestamp and SubCategory in ActivityObject
-
+                Log.i(TAG, "Save Timestamp and SubCategory in ActivityObject: ");
                 saveStateToLogList(activityObject);
-
                 activityObject.saveTimeStamp("user");
             }
-
             dataManager.activeList.remove(activityObject.title);
         }
-
 
         // Store edited ActivityObject back in DataManager
 //        if(!activityObject.title.equals("01"))
@@ -308,9 +291,7 @@ public class FragmentActivity extends BaseFragemnt implements
 //            holder.handleTimeCounter(activityObject.activeState);
             externalWork = false;
         }
-
         updateActiveList();
-
         /**
          * If Activity selected from ActiveList (disable Activity)
          * than notify the corresponding ActivityObject in the ActivityList
@@ -318,11 +299,9 @@ public class FragmentActivity extends BaseFragemnt implements
         if (holder == null) {
             objectAdapter.notifyItemChanged(objectAdapter.list.indexOf(activityObject.title));
         }
-
     }
 
     private void saveStateToLogList(ActivityObject activityObject) {
-
         Stamp stamp = new Stamp();
         stamp.user = var.user_ID;
         stamp.activity = activityObject.title;
@@ -338,7 +317,6 @@ public class FragmentActivity extends BaseFragemnt implements
         dataManager.logList.add(stamp);
     }
 
-
     /**
      * This function handle the onClick of an Activity when the Activity
      * will add manually to specific time in CalendarList.
@@ -348,12 +326,10 @@ public class FragmentActivity extends BaseFragemnt implements
      * @param title Name from the selected Activity
      */
     private void handelEditableActivity(String title) {
-
         // Get the DataObject which was clicked
         // there are all information stored about the activity object
         // state, names image ect.
         ActivityObject activityObject = dataManager.getActivityObject(title);
-
 
         String startTime = var.selectedTime;
         int startHour = Integer.parseInt(startTime.substring(11, 13));
@@ -365,13 +341,11 @@ public class FragmentActivity extends BaseFragemnt implements
         startDate.setMinutes(startMin);
         startDate.setSeconds(00);
 
-
         // EndTime
         Calendar endT = Calendar.getInstance();
         endT.setTime(startDate);
         endT.add(Calendar.MINUTE, var.timeFrame);
         Date endDate = endT.getTime();
-
 
         // add ActivityObject to CalenderList
         boolean add = dataManager.setActivityToCalendarList(var.selectedTime, activityObject.title);
@@ -388,12 +362,10 @@ public class FragmentActivity extends BaseFragemnt implements
     }
 
     private void addActivityObjectToCalendarList(String title, Date startTime) {
-
         // find current TimeSlot
         int startMin = startTime.getMinutes();
         int firstMin = 0;
         if (startMin > var.timeFrame) firstMin = var.timeFrame;
-
 
         Calendar calFirstTimeSlot = Calendar.getInstance();
         calFirstTimeSlot.setTime(startTime);
@@ -402,27 +374,21 @@ public class FragmentActivity extends BaseFragemnt implements
         firstDate.setSeconds(0);
         firstDate.setMinutes(firstMin);
 
-
         Calendar cal = Calendar.getInstance();
         // cal.add(Calendar.HOUR, 2); // for Testing purpouse
         Date currentDate = cal.getTime();
 
-
         Log.d(TAG, "time1 " + startTime);
-
 
         long diff = currentDate.getTime() - startTime.getTime();
         long seconds = diff / 1000;
         long minutes = seconds / 60;
 
         if (minutes >= var.minRecordingTime) {
-
-
             // Store Activity in TimeSlot from CalendarList
             dataManager.setActivityToCalendarList(firstDate.toString(), title);
 
             if (DEBUGMODE) Log.d(TAG, "time2; " + startTime + " || startTime; " + firstDate);
-
 
             calFirstTimeSlot.setTime(firstDate);
             calFirstTimeSlot.add(Calendar.MINUTE, var.timeFrame);
@@ -443,15 +409,12 @@ public class FragmentActivity extends BaseFragemnt implements
                     Log.d(TAG, "time4; " + startTime + " || startTime; " + firstDate + " || currentTime; " + currentDate);
 
             }
-
         }
     }
-
 
     // In this mode the user only sees a list of activitys
     // when he selects one than screens flip back to calendar screen
     private void editableMode() {
-
         if (var.editable) {
             menuView.setVisibility(View.GONE);
             recyclerView_activeData.setVisibility(View.GONE);
@@ -468,7 +431,9 @@ public class FragmentActivity extends BaseFragemnt implements
 
     // load edited List and update ActivityObjectListAdapter
     public void updateObjectList() {
-        objectAdapter.list = new ArrayList<>(dataManager.getObjectMap().keySet());
+//        objectAdapter.list = new ArrayList<>(dataManager.getObjectMap().keySet());
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        objectAdapter = new ObjectListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.countriesCustomFile).keySet()));
         objectAdapter.notifyDataSetChanged();
     }
 
@@ -484,7 +449,6 @@ public class FragmentActivity extends BaseFragemnt implements
      * add all active Activity to CalendarList
      */
     private void addActiveActivitiesToCalenderList() {
-
         ArrayList<String> activeList = dataManager.activeList;
 
         if (activeList != null && activeList.size() > 0) {

@@ -27,6 +27,9 @@ public class ActivityObject extends Object {
     public String imageName = "";
     public ArrayList<TimeFrame> timeFrameList = null;
 
+    public TimeFrame foodTimeFrame;
+    public ArrayList<String> foodSelection = new ArrayList<>();
+
 
     // Dynamic parameters
     public boolean activeState = false;
@@ -69,13 +72,25 @@ public class ActivityObject extends Object {
         this.portion = null;
         this.food = new ArrayList<>();
 
-        Log.d(TAG, "timeFrame " + timeFrame.contractWork + " " + timeFrame.startTime + " " + timeFrame.endTime);
+        Log.i(TAG, "timeFrame " + timeFrame.contractWork + " " + timeFrame.startTime + " " + timeFrame.endTime);
     }
 
+    public void setFoodTimeFrame(String editor) {
+        Log.i(TAG, "setFoodTimeFrame: ");
+        foodTimeFrame = new TimeFrame();
+        foodTimeFrame.startTime = this.startTime;
+        foodTimeFrame.endTime = this.endTime;
 
+        foodTimeFrame.contractWork = this.service;
+        foodTimeFrame.author = editor;
+
+        foodTimeFrame.portion = this.portion;
+        foodTimeFrame.food = this.food;
+
+        Log.i(TAG, "timeFrame " + foodTimeFrame.contractWork + " " + foodTimeFrame.startTime + " " + foodTimeFrame.endTime);
+    }
 
     public void saveTimeStamp(String author, Date startTime, Date endTime) {
-
         TimeFrame timeFrame = new TimeFrame();
         timeFrame.startTime = startTime;
         timeFrame.endTime = endTime;
@@ -85,7 +100,25 @@ public class ActivityObject extends Object {
         timeFrame.food = this.food;
 
         this.timeFrameList.add(timeFrame);
+    }
 
-
+    @Override
+    public String toString() {
+        return "ActivityObject{" +
+                "title='" + title + '\'' +
+                ", _id='" + _id + '\'' +
+                ", item='" + item + '\'' +
+                ", group_activity='" + group_activity + '\'' +
+                ", externalWork='" + externalWork + '\'' +
+                ", imageName='" + imageName + '\'' +
+                ", timeFrameList=" + timeFrameList +
+                ", activeState=" + activeState +
+                ", count=" + count +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", service='" + service + '\'' +
+                ", portion='" + portion + '\'' +
+                ", food=" + food +
+                '}';
     }
 }

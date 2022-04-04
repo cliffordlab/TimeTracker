@@ -23,7 +23,6 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
         ViewHolderListener {
 
     private final String TAG = "ObjectListAdapter";
-
     public List<String> list = null;
     private DialogPortionListOnClickListener listener;
     public Variables var = Variables.getInstance();
@@ -31,11 +30,9 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
     public String activeTime;
     public boolean leave;
 
-
     public DialogFoodListAdapter(List<String> activityObject) {
         this.list = activityObject;
     }
-
 
     @Override
     public View_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,11 +41,6 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
         View_Holder holder = new View_Holder(v);
         return holder;
     }
-
-
-
-
-
 
     @Override
     public void onBindViewHolder(View_Holder holder, int position) {
@@ -59,18 +51,13 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
         holder.id = object._id;
         if(dataManager.imageMap.get(object.imageName) != null ) holder.imageView.setImageBitmap((dataManager.imageMap.get(object.imageName)));
         holder.setBackground(object.activeState);
-        Log.d(TAG, "position " + position + " " + object.title + " "+ object.activeState);
+        Log.i(TAG, "position f" + position + " " + object.title + " "+ object.activeState);
     }
-
-
-
 
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -84,14 +71,11 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
     // Insert a new item to the RecyclerView on a predefined position
     public void insert(int position, String activityObject) {
         list.add(position, activityObject);
         notifyItemInserted(position);
     }
-
-
 
     // Remove a RecyclerView item containing a specified Daata object
     public void remove(ActivityObject activityObject) {
@@ -100,18 +84,12 @@ public class DialogFoodListAdapter extends RecyclerView.Adapter<View_Holder> imp
         notifyItemRemoved(position);
     }
 
-
     public void setListener (DialogPortionListOnClickListener listener) {this.listener = listener;}
-
-
 
     @Override
     public void didClickOnView(View view, String title, View_Holder holder) {
-
         if(listener != null) listener.didClickOnPortionListItem(title, holder);
-
     }
-
 
     @Override
     public void didLongClickOnView(View view, String title, View_Holder holder) {

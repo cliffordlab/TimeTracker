@@ -34,5 +34,19 @@ public class Stamp {
 //    public String sugar_honey;
 //    public String tea_coffee;
 
-
+    @Override
+    public String toString() {
+        return "Stamp{" +
+                "user='" + user + '\'' +
+                ", activity='" + activity + '\'' +
+                ", date='" + date + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", time='" + time + '\'' +
+                ", contractWork='" + contractWork + '\'' +
+                ", author='" + author + '\'' +
+                ", delete='" + delete + '\'' +
+                ", portion='" + portion + '\'' +
+                '}';
+    }
 }

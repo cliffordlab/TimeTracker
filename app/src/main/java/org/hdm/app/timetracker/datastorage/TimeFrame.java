@@ -16,4 +16,15 @@ public class TimeFrame {
     public String portion = "";
     public List food = new ArrayList();
 
+    @Override
+    public String toString() {
+        return "TimeFrame{" +
+                "startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", contractWork='" + contractWork + '\'' +
+                ", author='" + author + '\'' +
+                ", portion='" + portion + '\'' +
+                ", food=" + food +
+                '}';
+    }
 }

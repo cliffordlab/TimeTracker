@@ -16,7 +16,7 @@ public final class Consts {
 
     public final static String JSONFILE = "standard.json";
     public final static String TEMPACTIVITIES = "temp-activities.json";
-    public final static String PARENTPATH = "Rwandapp";
+    public final static String PARENTPATH = "TimeTracker";
     public final static String IMAGEPATH = "Images";
     public final static String CONFIGPATH = "Config";
     public final static String LOGPATH = "Logs";
@@ -30,7 +30,7 @@ public final class Consts {
     public final static String PROPERTIESFILE = "config.properties";
 
 
-    public final static String MAIN_FOLDER = "RwandaApp/";
+    public final static String MAIN_FOLDER = "TimeTracker/";
     public final static String IMAGE_FOLDER = MAIN_FOLDER + "Images/";
     public final static String CONFIG_FOLDER = MAIN_FOLDER + "Config/";
     public final static String LOGS_FOLDER = MAIN_FOLDER + "Logs/";

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<!DOCTYPE LinearLayout [<!ELEMENT LinearLayout (android.support.v7.widget.RecyclerView|Button)*><!ATTLIST LinearLayoutxmlns:android CDATA #REQUIREDandroid:orientation CDATA #REQUIREDandroid:layout_width CDATA #REQUIREDandroid:layout_height CDATA #REQUIRED><!ELEMENT android.support.v7.widget.RecyclerView (#PCDATA)><!ATTLIST android.support.v7.widget.RecyclerViewxmlns:android CDATA #REQUIREDandroid:id CDATA #REQUIREDandroid:layout_weight CDATA #REQUIREDandroid:layout_width CDATA #REQUIREDandroid:layout_height CDATA #REQUIREDandroid:scrollbars CDATA #REQUIREDandroid:scrollbarThumbVertical CDATA #REQUIREDandroid:scrollbarSize CDATA #REQUIRED><!ELEMENT Button (#PCDATA)><!ATTLIST Buttonandroid:id CDATA #REQUIREDandroid:layout_width CDATA #REQUIREDandroid:layout_height CDATA #REQUIREDandroid:layout_marginTop CDATA #REQUIREDandroid:layout_marginLeft CDATA #REQUIREDandroid:layout_marginRight CDATA #REQUIREDandroid:layout_marginBottom CDATA #REQUIREDandroid:text CDATA #REQUIREDandroid:background CDATA #REQUIRED>]>-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"

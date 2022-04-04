@@ -14,13 +14,16 @@ import android.widget.Button;
 
 import org.hdm.app.timetracker.R;
 import org.hdm.app.timetracker.adapter.DialogPortionListAdapter;
+import org.hdm.app.timetracker.adapter.ObjectListAdapter;
 import org.hdm.app.timetracker.datastorage.ActivityObject;
 import org.hdm.app.timetracker.datastorage.DataManager;
 import org.hdm.app.timetracker.listener.DialogPortionListOnClickListener;
+import org.hdm.app.timetracker.util.FileHandler;
 import org.hdm.app.timetracker.util.Variables;
 import org.hdm.app.timetracker.util.View_Holder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,8 +33,6 @@ import java.util.Map;
  * Created by Hannes on 03.06.2016.
  */
 public class DialogPortionFragment extends DialogFragment implements DialogPortionListOnClickListener, View.OnLongClickListener {
-
-
     private static final String TAG = "DialogPortionFragment";
     private ActivityObject activityObject;
     private DialogPortionListAdapter portionAdapter;
@@ -41,20 +42,19 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
     public Variables var = Variables.getInstance();
     public DataManager dataManager = DataManager.getInstance();
 
-
     View view;
     private Button btnDialogFood;
     private String lastSelectedItem = "";
 
+    private String portionsCustomFile = "portions.json";
+    private FileHandler fileHandler = new FileHandler();
 
     public DialogPortionFragment() {
     }
 
-
     public DialogPortionFragment(ActivityObject activityObject) {
         this.activityObject = activityObject;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,10 +62,8 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         view = inflater.inflate(R.layout.dialog_food, container,
                 false);
         initLayout();
-
         return view;
     }
-
 
     @Override
     public void onPause() {
@@ -74,12 +72,10 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         if (this != null) this.dismiss();
     }
 
-
     private void initLayout() {
-
         getDialog().setTitle("Choose a Portion");
-
-        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(dataManager.getPortionMap().keySet()));
+        String countrySetting = Variables.getInstance().country.toLowerCase();
+        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.portionsCustomFile).keySet()));
         portionAdapter.setListener(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_listt);
         recyclerView.setAdapter(portionAdapter);
@@ -92,7 +88,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
         btnDialogFood.setOnLongClickListener(this);
     }
 
-
     @Override
     public void didClickOnPortionListItem(String title, View_Holder holder) {
 
@@ -101,40 +96,34 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
     @Override
     public void didLongClickOnPortionListItem(String title, View_Holder view_holder) {
         Log.d(TAG, "click on Dialog " + title);
-
         handleObjectClick(title, view_holder);
     }
 
     private void handleObjectClick(String title, View_Holder view_holder) {
-
         // get clicked PortionObject
         ActivityObject portionObject = dataManager.getPortionObject(title);
-        Log.d(TAG, "activState " + portionObject.activeState + " portion " + activityObject.portion);
-
+        Log.i(TAG, "activState " + portionObject.activeState + " portion " + activityObject.portion);
 
         if (portionObject.activeState) {
             portionObject.activeState = false;
         } else {
             portionObject.activeState = true;
-
             // save portion to activityObject
+            Log.i(TAG, "save portion to activityObject DialogPortionFragment.java: ");
             activityObject.portion = portionObject.title;
 
             if (!portionObject.title.equals(lastSelectedItem)) {
-
                 ActivityObject lastObject = dataManager.getPortionObject(lastSelectedItem);
-
                 if (lastObject != null) {
-
                     lastObject.activeState = false;
                     dataManager.setPortionObject(lastObject);
                     portionAdapter.notifyItemChanged(portionAdapter.list.indexOf(lastSelectedItem));
                 }
             }
-
+            Log.i(TAG, "DialogPortionFragment handleObjectClick lastSelectedItem: " + lastSelectedItem);
+            Log.i(TAG, "DialogPortionFragment handleObjectClick portionObject.title: " + portionObject.title);
             lastSelectedItem = portionObject.title;
         }
-
 
         // set Background to green
         view_holder.setBackground(portionObject.activeState);
@@ -148,7 +137,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
 
     @Override
     public boolean onLongClick(View v) {
-
         // pass onto next Dialog
         DialogFoodFragment dFoodFragment = new DialogFoodFragment(activityObject);
         FragmentManager fm = getFragmentManager();
@@ -164,32 +152,4 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
             entry.getValue().activeState = false;
         }
     }
-
-
-//    @Override
-//    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        return new AlertDialog.Builder(getActivity())
-//                // Set Dialog Icon
-////                .setIcon(R.drawable.shovel)
-//                // Set Dialog Title
-////                .setTitle("Alert DialogFragment")
-//                // Set Dialog Message
-////                .setMessage("Alert DialogFragment Tutorial")
-//
-//                // Positive button
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Do something else
-//                    }
-//                })
-//
-//                // Negative Button
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog,	int which) {
-//                        // Do something else
-//                    }
-//                }).create();
-//    }
-
-
 }
