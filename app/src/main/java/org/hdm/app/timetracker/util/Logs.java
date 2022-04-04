@@ -37,9 +37,6 @@ public class Logs {
     public void saveStateToLogList(DataManager dataManager, String title) {
         this.dataManager = dataManager;
         ActivityObject activityObject = dataManager.getActivityObject(title);
-//        Log.i(TAG, "Logs saveStateToLogList title: " + activityObject.title);
-//        Log.i(TAG, "Logs saveStateToLogList activityObject.toString: " + activityObject.toString());
-//        Log.i(TAG, "Logs saveStateToLogList timeFrameList: " + activityObject.timeFrameList.toString());
 
         stamp = new Stamp();
         stamp.user = var.user_ID;
@@ -47,8 +44,6 @@ public class Logs {
         stamp.date = Calendar.getInstance().getTime().toString();
 
         if(activityObject.title.equals("Eating + Drinking")) {
-//            Log.i(TAG, "Eating + Drinking stamp: ");
-//            TimeFrame timeFrame = activityObject.timeFrameList.get(activityObject.timeFrameList.size()-1);
             TimeFrame timeFrame = activityObject.foodTimeFrame;
             stamp.startTime = timeFrame.startTime.toString();
             stamp.endTime = timeFrame.endTime.toString();
@@ -87,7 +82,6 @@ public class Logs {
     private void saveLogsOnExternal(String fileName) {
         String path = enviroment.toString() + "/" + LOGS_FOLDER;
         Gson gson = new Gson();
-//        String s = gson.toJson(DataManager.getInstance().logList);
         String s = gson.toJson(stamp);
         writeStringOnExternal(s, fileName, path);
         DataManager.getInstance().lastLog = s;

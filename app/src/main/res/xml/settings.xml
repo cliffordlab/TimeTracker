@@ -55,7 +55,7 @@
         android:key="pref_key_activity">
         <Preference
             android:key="@string/pref_key_preferences_reset_activities"
-            android:summary="Reset - LogFiles"
+            android:summary="Delete all Logfiles on this device"
             android:title="Reset Log" />
 
         <SwitchPreference

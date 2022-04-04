@@ -66,8 +66,6 @@ public class DialogFoodFragment extends DialogFragment implements DialogPortionL
 
     private void initLayout() {
         getDialog().setTitle("Choose Types of Food");
-
-//        foodAdapter = new DialogFoodListAdapter((List) new ArrayList<>(dataManager.getFoodMap().keySet()));
         String countrySetting = Variables.getInstance().country.toLowerCase();
         foodAdapter = new DialogFoodListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.foodCustomFile).keySet()));
         foodAdapter.setListener(this);

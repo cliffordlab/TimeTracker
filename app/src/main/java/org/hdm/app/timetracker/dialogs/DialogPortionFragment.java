@@ -74,8 +74,6 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
 
     private void initLayout() {
         getDialog().setTitle("Choose a Portion");
-
-//        portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(dataManager.getPortionMap().keySet()));
         String countrySetting = Variables.getInstance().country.toLowerCase();
         portionAdapter = new DialogPortionListAdapter((List) new ArrayList<>(fileHandler.getCustomList(countrySetting, this.portionsCustomFile).keySet()));
         portionAdapter.setListener(this);
@@ -154,31 +152,4 @@ public class DialogPortionFragment extends DialogFragment implements DialogPorti
             entry.getValue().activeState = false;
         }
     }
-
-//    @Override
-//    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        return new AlertDialog.Builder(getActivity())
-//                // Set Dialog Icon
-////                .setIcon(R.drawable.shovel)
-//                // Set Dialog Title
-////                .setTitle("Alert DialogFragment")
-//                // Set Dialog Message
-////                .setMessage("Alert DialogFragment Tutorial")
-//
-//                // Positive button
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Do something else
-//                    }
-//                })
-//
-//                // Negative Button
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog,	int which) {
-//                        // Do something else
-//                    }
-//                }).create();
-//    }
-
-
 }
